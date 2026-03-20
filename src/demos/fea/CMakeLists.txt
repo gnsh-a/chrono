@@ -4,6 +4,8 @@ set(FEA_DEMOS
     demo_FEA_basic
     demo_FEA_dynamics
     demo_FEA_loads_statics
+    jz_FEA_3243_check
+    jz_FEA_3443_check
 )
 
 # Add demos that require IRRLICHT run-time visualization
@@ -136,4 +138,3 @@ foreach(PROGRAM ${FEA_DEMOS})
     
     install(TARGETS ${PROGRAM} CONFIGURATIONS Release DESTINATION ${CH_INSTALL_DEMO})
 endforeach(PROGRAM)
-
