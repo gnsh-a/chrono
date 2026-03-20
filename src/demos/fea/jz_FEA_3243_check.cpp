@@ -42,8 +42,9 @@
 #include "chrono/physics/ChLoadContainer.h"
 #include "chrono/physics/ChLoadsNodeXYZ.h"
 #include "chrono/physics/ChSystemSMC.h"
-#include "chrono/solver/ChIterativeSolverLS.h"
 #include "chrono/utils/ChOpenMP.h"
+
+#include "chrono_pardisomkl/ChSolverPardisoMKL.h"
 
 #include "chrono/functions/ChFunctionConst.h"
 #include "chrono/functions/ChFunctionSequence.h"
@@ -341,12 +342,10 @@ int main(int argc, char* argv[]) {
         std::cout << "Thread settings: nthreads=" << nthreads << " (chrono/collision/eigen)\n";
     }
 
-    auto solver = chrono_types::make_shared<ChSolverMINRES>();
+    auto solver = chrono_types::make_shared<ChSolverPardisoMKL>();
     system.SetSolver(solver);
-    solver->SetMaxIterations(1000);
-    const double solver_tol = (opt.num_elements == NumElementsForRes(32)) ? 1e-3 : 1e-4;
-    solver->SetTolerance(solver_tol);
-    solver->EnableDiagonalPreconditioner(true);
+    solver->UseSparsityPatternLearner(true);
+    solver->LockSparsityPattern(true);
     solver->SetVerbose(false);
 
     system.SetTimestepperType(ChTimestepper::Type::EULER_IMPLICIT);
@@ -362,11 +361,7 @@ int main(int argc, char* argv[]) {
         const double total_length = opt.element_length * opt.num_elements;
         std::cout << "ANCF 3243 cantilever demo\n";
         std::cout << "  integration : " << (opt.use_continuous_integration ? "ContInt" : "PreInt") << "\n";
-        std::cout << "  solver      : " << system.GetSolver()->GetTypeAsString();
-        if (auto it = system.GetSolver()->AsIterative()) {
-            std::cout << " (tol=" << it->GetTolerance() << ", maxiters=" << it->GetMaxIterations() << ")";
-        }
-        std::cout << "\n";
+        std::cout << "  solver      : " << system.GetSolver()->GetTypeAsString() << "\n";
         std::cout << "  elements    : " << opt.num_elements << "\n";
         std::cout << "  L_total     : " << total_length << " m\n";
         std::cout << "  dx          : " << opt.element_length << " m (per-element)\n";

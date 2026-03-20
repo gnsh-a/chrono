@@ -4,9 +4,14 @@ set(FEA_DEMOS
     demo_FEA_basic
     demo_FEA_dynamics
     demo_FEA_loads_statics
-    jz_FEA_3243_check
-    jz_FEA_3443_check
 )
+
+if(CH_ENABLE_MODULE_PARDISO_MKL)
+    set(FEA_DEMOS ${FEA_DEMOS}
+        jz_FEA_3243_check
+        jz_FEA_3443_check
+    )
+endif()
 
 # Add demos that require IRRLICHT run-time visualization
 if(CH_ENABLE_MODULE_IRRLICHT)
