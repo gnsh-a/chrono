@@ -6,6 +6,13 @@ set(FEA_DEMOS
     demo_FEA_loads_statics
 )
 
+if(CH_ENABLE_MODULE_PARDISO_MKL)
+    set(FEA_DEMOS ${FEA_DEMOS}
+        jz_FEA_3243_check
+        jz_FEA_3443_check
+    )
+endif()
+
 # Add demos that require IRRLICHT run-time visualization
 if(CH_ENABLE_MODULE_IRRLICHT)
 
@@ -136,4 +143,3 @@ foreach(PROGRAM ${FEA_DEMOS})
     
     install(TARGETS ${PROGRAM} CONFIGURATIONS Release DESTINATION ${CH_INSTALL_DEMO})
 endforeach(PROGRAM)
-
