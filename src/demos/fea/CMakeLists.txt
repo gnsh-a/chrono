@@ -10,6 +10,7 @@ if(CH_ENABLE_MODULE_PARDISO_MKL)
     set(FEA_DEMOS ${FEA_DEMOS}
         jz_FEA_3243_check
         jz_FEA_3443_check
+        jz_FEA_3243_check_cudss
     )
 endif()
 
@@ -101,6 +102,10 @@ list(APPEND LIBS Chrono_core)
 
 if(CH_ENABLE_MODULE_IRRLICHT)
   list(APPEND LIBS "Chrono_irrlicht")
+endif()
+
+if(CH_ENABLE_MODULE_CUDSS)
+  list(APPEND LIBS "Chrono_cudss")
 endif()
 
 if(CH_ENABLE_MODULE_VSG)
