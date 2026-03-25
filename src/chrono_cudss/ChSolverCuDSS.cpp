@@ -4,15 +4,13 @@
 
 namespace chrono {
 
-
-#define CUDSS_CHECK(call)                                                           
-    do {                                                                            
-        cudssStatus_t _s = (call);                                                  
-        if (_s != CUDSS_STATUS_SUCCESS) {                                           
-            m_last_status = _s;                                                     
-            return false;                                                           
-        }                                                                           
-    } while (0)
+    static bool cudss_check(cudssStatus_t s, cudssStatus_t& last_status) {
+        if (s != CUDSS_STATUS_SUCCESS) {
+            last_status = s;
+            return false;
+        }
+        return true;
+    }
 
 // ChSolverCuDSS
 ChSolverCuDSS::ChSolverCuDSS(int device_id) : m_device(device_id) {
@@ -66,24 +64,20 @@ bool ChSolverCuDSS::FactorizeMatrix(bool analyze) {
     if (analyze || realloc) {
         if (m_mat_A) { cudssMatrixDestroy(m_mat_A); m_mat_A = nullptr; }
 
-        CUDSS_CHECK(cudssMatrixCreateCsr(
-            &m_mat_A,
-            n, n, nnz,
-            d_row_ptr, d_col_ind, d_values,
-            CUDSS_INDEX_32I, CUDSS_INDEX_32I,
-            CUDSS_BASE_ZERO,
-            CUDA_R_64F,
-            CUDSS_MTYPE_GENERAL,
-            CUDSS_MVIEW_FULL));
+        if (!cudss_check(cudssMatrixCreateCsr(
+                &m_mat_A, (int64_t)n, (int64_t)n, (int64_t)nnz,
+                d_row_ptr, nullptr, d_col_ind, d_values,
+                CUDA_R_32I, CUDA_R_64F,
+                CUDSS_MTYPE_GENERAL, CUDSS_MVIEW_FULL, CUDSS_BASE_ZERO), m_last_status)) return false;
 
-        CUDSS_CHECK(cudssExecute(m_handle, CUDSS_PHASE_ANALYSIS,
-                                 m_config, m_data, m_mat_A, nullptr, nullptr));
+        if (!cudss_check(cudssExecute(m_handle, CUDSS_PHASE_ANALYSIS,
+                m_config, m_data, m_mat_A, nullptr, nullptr),m_last_status)) return false;
 
-        CUDSS_CHECK(cudssExecute(m_handle, CUDSS_PHASE_FACTORIZATION,
-                                 m_config, m_data, m_mat_A, nullptr, nullptr));
+        if (!cudss_check(cudssExecute(m_handle, CUDSS_PHASE_FACTORIZATION,
+                m_config, m_data, m_mat_A, nullptr, nullptr),m_last_status)) return false;
     } else {
-        CUDSS_CHECK(cudssExecute(m_handle, CUDSS_PHASE_REFACTORIZATION,
-                                 m_config, m_data, m_mat_A, nullptr, nullptr));
+        if (!cudss_check(cudssExecute(m_handle, CUDSS_PHASE_REFACTORIZATION,
+                m_config, m_data, m_mat_A, nullptr, nullptr),m_last_status)) return false;
     }
 
     return true;
@@ -99,11 +93,11 @@ bool ChSolverCuDSS::SolveSystem() {
     if (m_mat_x) { cudssMatrixDestroy(m_mat_x); m_mat_x = nullptr; }
     if (m_mat_b) { cudssMatrixDestroy(m_mat_b); m_mat_b = nullptr; }
 
-    CUDSS_CHECK(cudssMatrixCreateDn(&m_mat_x, n, 1, n, d_x, CUDA_R_64F, CUDSS_LAYOUT_COL_MAJOR));
-    CUDSS_CHECK(cudssMatrixCreateDn(&m_mat_b, n, 1, n, d_b, CUDA_R_64F, CUDSS_LAYOUT_COL_MAJOR));
+    if (!cudss_check(cudssMatrixCreateDn(&m_mat_x, n, 1, n, d_x, CUDA_R_64F, CUDSS_LAYOUT_COL_MAJOR),m_last_status)) return false;
+    if (!cudss_check(cudssMatrixCreateDn(&m_mat_b, n, 1, n, d_b, CUDA_R_64F, CUDSS_LAYOUT_COL_MAJOR),m_last_status)) return false;
 
-    CUDSS_CHECK(cudssExecute(m_handle, CUDSS_PHASE_SOLVE,
-                             m_config, m_data, m_mat_A, m_mat_x, m_mat_b));
+    if (!cudss_check(cudssExecute(m_handle, CUDSS_PHASE_SOLVE,
+                                  m_config, m_data, m_mat_A, m_mat_x, m_mat_b),m_last_status)) return false;
 
     // Copy solution
     cudaMemcpy(m_sol.data(), d_x, n * sizeof(double), cudaMemcpyDeviceToHost);
@@ -167,22 +161,18 @@ bool ChSolverComplexCuDSS::FactorizeMatrix() {
     if (realloc) {
         if (m_mat_A) { cudssMatrixDestroy(m_mat_A); m_mat_A = nullptr; }
 
-        CUDSS_CHECK(cudssMatrixCreateCsr(
-            &m_mat_A,
-            n, n, nnz,
-            d_row_ptr, d_col_ind, d_values,
-            CUDSS_INDEX_32I, CUDSS_INDEX_32I,
-            CUDSS_BASE_ZERO,
-            CUDA_C_64F,
-            CUDSS_MTYPE_GENERAL,
-            CUDSS_MVIEW_FULL));
+        if (!cudss_check(cudssMatrixCreateCsr(
+                &m_mat_A, (int64_t)n, (int64_t)n, (int64_t)nnz,
+                d_row_ptr, nullptr, d_col_ind, d_values,
+                CUDA_R_32I, CUDA_C_64F,
+                CUDSS_MTYPE_GENERAL, CUDSS_MVIEW_FULL, CUDSS_BASE_ZERO), m_last_status)) return false;
 
-        CUDSS_CHECK(cudssExecute(m_handle, CUDSS_PHASE_ANALYSIS,
-                                 m_config, m_data, m_mat_A, nullptr, nullptr));
+        if (!cudss_check(cudssExecute(m_handle, CUDSS_PHASE_ANALYSIS,
+                                 m_config, m_data, m_mat_A, nullptr, nullptr),m_last_status)) return false;
     }
 
-    CUDSS_CHECK(cudssExecute(m_handle, CUDSS_PHASE_FACTORIZATION,
-                             m_config, m_data, m_mat_A, nullptr, nullptr));
+    if (!cudss_check(cudssExecute(m_handle, CUDSS_PHASE_FACTORIZATION,
+                             m_config, m_data, m_mat_A, nullptr, nullptr),m_last_status)) return false;
 
     return true;
 }
@@ -197,11 +187,11 @@ bool ChSolverComplexCuDSS::SolveSystem(const ChVectorDynamic<std::complex<double
     if (m_mat_x) { cudssMatrixDestroy(m_mat_x); m_mat_x = nullptr; }
     if (m_mat_b) { cudssMatrixDestroy(m_mat_b); m_mat_b = nullptr; }
 
-    CUDSS_CHECK(cudssMatrixCreateDn(&m_mat_x, n, 1, n, d_x, CUDA_C_64F, CUDSS_LAYOUT_COL_MAJOR));
-    CUDSS_CHECK(cudssMatrixCreateDn(&m_mat_b, n, 1, n, d_b, CUDA_C_64F, CUDSS_LAYOUT_COL_MAJOR));
+    if (!cudss_check(cudssMatrixCreateDn(&m_mat_x, n, 1, n, d_x, CUDA_C_64F, CUDSS_LAYOUT_COL_MAJOR),m_last_status)) return false;
+    if (!cudss_check(cudssMatrixCreateDn(&m_mat_b, n, 1, n, d_b, CUDA_C_64F, CUDSS_LAYOUT_COL_MAJOR),m_last_status)) return false;
 
-    CUDSS_CHECK(cudssExecute(m_handle, CUDSS_PHASE_SOLVE,
-                             m_config, m_data, m_mat_A, m_mat_x, m_mat_b));
+    if (!cudss_check(cudssExecute(m_handle, CUDSS_PHASE_SOLVE,
+                                  m_config, m_data, m_mat_A, m_mat_x, m_mat_b),m_last_status)) return false;
 
     cudaMemcpy(m_sol.data(), d_x, n * sizeof(cuDoubleComplex), cudaMemcpyDeviceToHost);
 

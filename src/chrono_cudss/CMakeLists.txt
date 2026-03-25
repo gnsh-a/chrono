@@ -1,4 +1,4 @@
-option(CH_ENABLE_MODULE_CUDSS "Enable the Chrono cuDSS module" OFF)
+option(CH_ENABLE_MODULE_CUDSS "Enable the Chrono cuDSS module" ON)
 
 if(NOT CH_ENABLE_MODULE_CUDSS)
     return()

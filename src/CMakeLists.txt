@@ -492,6 +492,7 @@ add_subdirectory(chrono)
 # ATTENTION: It is important to configure Chrono::Mumps before any other modules that may depend on Intel MKL!
 add_subdirectory(chrono_mumps)
 add_subdirectory(chrono_pardisomkl)
+add_subdirectory(chrono_cudss)
 add_subdirectory(chrono_parsers)
 add_subdirectory(chrono_matlab)
 add_subdirectory(chrono_irrlicht)
