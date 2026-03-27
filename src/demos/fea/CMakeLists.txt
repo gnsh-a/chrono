@@ -10,6 +10,7 @@ if(CH_ENABLE_MODULE_PARDISO_MKL)
     set(FEA_DEMOS ${FEA_DEMOS}
         jz_FEA_3243_check
         jz_FEA_3443_check
+        demo_FEA_fingerANCF
     )
 endif()
 
