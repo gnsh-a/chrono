@@ -12,6 +12,9 @@
         return true;
     }
 
+
+namespace chrono {
+    
 // ChSolverCuDSS
 ChSolverCuDSS::ChSolverCuDSS(int device_id) : m_device(device_id) {
     cudaSetDevice(m_device);
