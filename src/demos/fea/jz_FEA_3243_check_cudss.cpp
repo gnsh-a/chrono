@@ -127,6 +127,8 @@ static int NumElementsForRes(int res) {
             return 200000;
         case 32:
             return 500000;
+        case 64:
+            return 1000000;
     }
     return -1;
 }
@@ -351,8 +353,8 @@ int main(int argc, char* argv[]) {
 
     system.SetTimestepperType(ChTimestepper::Type::EULER_IMPLICIT);
 
-    const int release_step = 100;
-    const int total_steps = 200;
+    const int release_step = 5;
+    const int total_steps = 10;
 
     std::shared_ptr<ChNodeFEAxyzDDD> tip_node;
     auto tip_element = BuildCantileverBeam(system, opt, tip_node);

@@ -2,8 +2,8 @@
 
 #include <iostream>
 
-namespace chrono {
-
+//ToDo: Add Cuda Events for timings
+// Go to mkl and explore Phases for each phase timing (analysis, factorization, solve) ref_git: https://github.com/uwsbel/GPU-Linear-Systems
     static bool cudss_check(cudssStatus_t s, cudssStatus_t& last_status) {
         if (s != CUDSS_STATUS_SUCCESS) {
             last_status = s;
@@ -90,6 +90,7 @@ bool ChSolverCuDSS::SolveSystem() {
     cudaMemcpy(d_b, m_rhs.data(), n * sizeof(double), cudaMemcpyHostToDevice);
 
     // Recreate dense vector descriptors (hopefully avoids stale pointer issues[need to test])
+    // ToDo: leave for now, modify after chrono chage
     if (m_mat_x) { cudssMatrixDestroy(m_mat_x); m_mat_x = nullptr; }
     if (m_mat_b) { cudssMatrixDestroy(m_mat_b); m_mat_b = nullptr; }
 
