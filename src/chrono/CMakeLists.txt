@@ -1467,6 +1467,14 @@ if(HDF5_FOUND)
     endif()
 endif()
 
+if(CH_ENABLE_MODULE_CUDSS)
+    find_package(CUDAToolkit REQUIRED)
+    
+    target_link_libraries(Chrono_core PUBLIC CUDA::cudart)
+    
+    message(STATUS "Chrono_core: Linking CUDA runtime (CuDSS enabled)")
+endif()
+
 # Add the 'socket' library to the linking, depending on platform.
 if(${CMAKE_SYSTEM_NAME} MATCHES "Windows")
 	if("${CH_COMPILER}" STREQUAL "COMPILER_MSVC")
