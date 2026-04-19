@@ -348,7 +348,7 @@ int main(int argc, char* argv[]) {
     system.SetSolver(solver);
     solver->UseSparsityPatternLearner(true);
     solver->LockSparsityPattern(true);
-    solver->SetVerbose(false);
+    solver->SetVerbose(true);
 
     system.SetTimestepperType(ChTimestepper::Type::EULER_IMPLICIT);
 
