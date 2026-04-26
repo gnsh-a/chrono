@@ -16,6 +16,7 @@
 #define CHSOLVERMKL_H
 
 #include "chrono_pardisomkl/ChApiPardisoMKL.h"
+#include "chrono/core/ChTimer.h"
 #include "chrono/solver/ChDirectSolverLS.h"
 #include "chrono/solver/ChDirectSolverLScomplex.h"
 
@@ -64,6 +65,15 @@ class ChApiPardisoMKL ChSolverPardisoMKL : public ChDirectSolverLS {
     /// Get a handle to the underlying MKL engine.
     Eigen::PardisoLU<ChSparseMatrix>& GetMklEngine() { return m_engine; }
 
+    /// Get the elapsed time (seconds) of the most recent analyzePattern call.
+    double GetTimeAnalyze() const { return m_timer_analyze(); }
+
+    /// Get the elapsed time (seconds) of the most recent factorize call.
+    double GetTimeFactorize() const { return m_timer_factorize(); }
+
+    /// Get the elapsed time (seconds) of the most recent solve call.
+    double GetTimeSolveOnly() const { return m_timer_solve(); }
+
   private:
     /// Factorize the current sparse matrix and return true if successful.
     virtual bool FactorizeMatrix(bool analyze) override;
@@ -77,6 +87,10 @@ class ChApiPardisoMKL ChSolverPardisoMKL : public ChDirectSolverLS {
     virtual void PrintErrorMessage() override;
 
     Eigen::PardisoLU<ChSparseMatrix> m_engine;  ///< underlying Eigen Pardiso interface
+
+    ChTimer m_timer_analyze;     ///< per-call timer for analyzePattern phase
+    ChTimer m_timer_factorize;   ///< per-call timer for factorize phase
+    ChTimer m_timer_solve;       ///< per-call timer for solve phase
 };
 
 /// Sparse complex Pardiso direct solver.
