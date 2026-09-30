@@ -60,6 +60,7 @@
 #include "chrono/utils/ChOpenMP.h"
 
 #include "chrono_pardisomkl/ChSolverPardisoMKL.h"
+#include "chrono_cudss/ChSolverCuDSS.h"
 
 #include "chrono/functions/ChFunctionConst.h"
 #include "chrono/functions/ChFunctionSequence.h"
@@ -406,7 +407,7 @@ int main(int argc, char* argv[]) {
         std::cout << "Thread settings: nthreads=" << nthreads << " (chrono/collision/eigen)\n";
     }
 
-    auto solver = chrono_types::make_shared<ChSolverPardisoMKL>(nthreads);  // default would be 1 thread
+    auto solver = chrono_types::make_shared<ChSolverCuDSS>();
     system.SetSolver(solver);
     solver->UseSparsityPatternLearner(true);
     solver->LockSparsityPattern(true);

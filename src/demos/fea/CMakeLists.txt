@@ -11,6 +11,7 @@ if(CH_ENABLE_MODULE_PARDISO_MKL)
         jz_FEA_3243_check
         jz_FEA_3443_check
         jz_FEA_3243_check_cudss
+        jz_FEA_3443_check_cudss
     )
 endif()
 

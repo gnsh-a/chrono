@@ -344,7 +344,7 @@ int main(int argc, char* argv[]) {
         std::cout << "Thread settings: nthreads=" << nthreads << " (chrono/collision/eigen)\n";
     }
 
-    auto solver = chrono_types::make_shared<ChSolverPardisoMKL>();
+    auto solver = chrono_types::make_shared<ChSolverPardisoMKL>(nthreads);  // default would be 1 thread
     system.SetSolver(solver);
     solver->UseSparsityPatternLearner(true);
     solver->LockSparsityPattern(true);
