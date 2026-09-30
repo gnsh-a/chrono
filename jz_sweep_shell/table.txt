@@ -1,0 +1,17 @@
+ res         n         nnz |  wall P  wall C     x |   anl P   anl C     x |  fac P  fac C     x |  sol P  sol C     x | fac+sol x |  setupP  setupC |   asmP   asmC
+  10     1,507     138,769 |    0.74    0.85  0.87 |     6.8    10.5  0.65 |   1.75   1.60   1.1 |   0.86   0.16     5 |       1.5 |    0.35    0.52 |   0.14   0.14
+  20     5,397     536,559 |    2.20    2.25  0.98 |    16.7    17.7  0.94 |   8.34   5.35   1.6 |   2.48   0.32     8 |       1.9 |    1.00    0.97 |   0.40   0.57
+  30    11,687   1,193,549 |    5.60    4.28  1.31 |    45.9    29.3  1.57 |  14.80  14.39   1.0 |   8.18   0.49    17 |       1.5 |    2.44    1.85 |   1.30   0.92
+  40    20,377   2,109,739 |   10.45    8.21  1.27 |    89.5    52.1  1.72 |  31.18  27.87   1.1 |  16.94   0.69    25 |       1.7 |    4.84    3.29 |   2.26   2.21
+  50    31,467   3,285,129 |   17.40   11.05  1.58 |   154.4    63.4  2.43 |  54.50  42.94   1.3 |  34.45   0.81    42 |       2.0 |    8.31    4.44 |   3.55   2.47
+  70    60,847   6,413,509 |   29.55   23.01  1.28 |   208.7   114.5  1.82 | 138.16 104.09   1.3 |  64.82   1.31    49 |       1.9 |   13.97    9.21 |   4.97   5.63
+ 100   122,917  13,050,079 |   66.19   48.54  1.36 |   434.1   227.6  1.91 | 389.49 309.23   1.3 | 141.49   2.26    62 |       1.7 |   33.62   22.21 |  10.41  10.11
+
+checks:
+ res10: calls=40/40  wall spread P 0.58-0.75  C 0.85-0.86  maxres P 7e-17 C 1e-16  tipsP==tipsC: True (1 distinct)  tip=4.000000 1.000000 -0.000043  RSS P 0.2GB C 0.5GB
+ res20: calls=40/40  wall spread P 2.16-2.71  C 2.00-2.26  maxres P 9e-17 C 1e-16  tipsP==tipsC: True (1 distinct)  tip=4.000000 1.000000 -0.000045  RSS P 0.5GB C 0.8GB
+ res30: calls=40/40  wall spread P 4.88-5.69  C 4.28-4.80  maxres P 1e-16 C 2e-16  tipsP==tipsC: True (1 distinct)  tip=4.000000 1.000000 -0.000045  RSS P 1.2GB C 1.4GB
+ res40: calls=40/40  wall spread P 8.59-10.48  C 7.28-8.37  maxres P 1e-16 C 2e-16  tipsP==tipsC: True (1 distinct)  tip=4.000000 1.000000 -0.000046  RSS P 2.0GB C 2.1GB
+ res50: calls=40/40  wall spread P 17.07-17.48  C 11.02-11.23  maxres P 2e-16 C 3e-16  tipsP==tipsC: True (1 distinct)  tip=4.000000 1.000000 -0.000046  RSS P 3.2GB C 3.1GB
+ res70: calls=40/40  wall spread P 29.46-30.99  C 22.24-23.56  maxres P 3e-16 C 4e-16  tipsP==tipsC: True (1 distinct)  tip=4.000000 1.000000 -0.000046  RSS P 6.2GB C 5.9GB
+ res100: calls=40/40  wall spread P 65.16-66.59  C 48.42-49.33  maxres P 4e-16 C 7e-16  tipsP==tipsC: True (1 distinct)  tip=3.999999 1.000000 -0.000046  RSS P 12.6GB C 11.7GB

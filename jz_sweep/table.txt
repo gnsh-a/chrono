@@ -1,0 +1,11 @@
+ res         n         nnz |  wall P  wall C     x |   anl P   anl C     x |  fac P  fac C     x |  sol P  sol C     x | fac+sol x |  setupP  setupC |   asmP   asmC
+   0    12,000     431,712 |    1.60    1.16  1.37 |    27.8    14.8  1.88 |   1.54   0.63   2.4 |   2.12   0.11    20 |       5.0 |    1.03    0.66 |   0.29   0.34
+   2   120,000   4,319,712 |   13.97    7.26  1.92 |   189.4    51.7  3.66 |  16.02   3.42   4.7 |  35.11   0.30   115 |      13.7 |    8.34    2.52 |   2.39   2.81
+   4   600,000  21,599,712 |   76.97   31.72  2.43 |  1083.5   186.2  5.82 |  81.55  13.56   6.0 | 179.14   1.16   155 |      17.7 |   47.61    9.13 |  11.83  12.57
+   8 1,200,000  43,199,712 |  154.68   61.57  2.51 |  2190.6   376.0  5.83 | 167.32  26.53   6.3 | 371.54   2.23   167 |      18.7 |   95.57   18.29 |  23.55  23.38
+
+checks:
+ res0: calls=40/40  wall spread P 1.19-1.83  C 0.99-1.18  maxres P 4e-15 C 8e-15  tipsP==tipsC: True (1 distinct)  tip=199.999372 0.000000 0.027812  RSS P 0.2GB C 0.5GB
+ res2: calls=40/40  wall spread P 13.92-14.29  C 6.59-8.53  maxres P 6e-15 C 1e-14  tipsP==tipsC: True (1 distinct)  tip=1999.999372 0.000000 0.027812  RSS P 1.2GB C 1.2GB
+ res4: calls=40/40  wall spread P 76.20-78.38  C 30.51-31.96  maxres P 1e-14 C 1e-14  tipsP==tipsC: False (1 distinct)  tip=9999.999372 0.000000 0.027812  RSS P 5.9GB C 5.1GB
+ res8: calls=40/40  wall spread P 154.24-158.05  C 60.99-62.70  maxres P 1e-14 C 9e-15  tipsP==tipsC: False (1 distinct)  tip=19999.999373 -0.000000 0.027812  RSS P 11.8GB C 9.9GB

@@ -1,0 +1,25 @@
+16:35:47 res0 pardiso rep1 exit=0 Wall time (loop)     : 0.575224 peakRSS=163724kB
+16:35:48 res0 cudss rep1 exit=0 Wall time (loop)     : 0.856097 peakRSS=490356kB
+16:35:50 res0 pardiso rep2 exit=0 Wall time (loop)     : 0.741263 peakRSS=163816kB
+16:35:51 res0 cudss rep2 exit=0 Wall time (loop)     : 0.854653 peakRSS=490664kB
+16:35:52 res0 pardiso rep3 exit=0 Wall time (loop)     : 0.752362 peakRSS=163576kB
+16:35:54 res0 cudss rep3 exit=0 Wall time (loop)     : 0.851824 peakRSS=490692kB
+16:35:57 res2 pardiso rep1 exit=0 Wall time (loop)     : 2.198639 peakRSS=532000kB
+16:36:01 res2 cudss rep1 exit=0 Wall time (loop)     : 2.249996 peakRSS=815208kB
+16:36:06 res2 pardiso rep2 exit=0 Wall time (loop)     : 2.707851 peakRSS=531612kB
+16:36:09 res2 cudss rep2 exit=0 Wall time (loop)     : 1.997712 peakRSS=815424kB
+16:36:13 res2 pardiso rep3 exit=0 Wall time (loop)     : 2.160302 peakRSS=532372kB
+16:36:17 res2 cudss rep3 exit=0 Wall time (loop)     : 2.256002 peakRSS=814956kB
+16:36:44 res4 pardiso rep1 exit=0 Wall time (loop)     : 17.070607 peakRSS=3178560kB
+16:37:05 res4 cudss rep1 exit=0 Wall time (loop)     : 11.226130 peakRSS=3146360kB
+16:37:33 res4 pardiso rep2 exit=0 Wall time (loop)     : 17.478441 peakRSS=3151780kB
+16:37:54 res4 cudss rep2 exit=0 Wall time (loop)     : 11.022991 peakRSS=3146340kB
+16:38:21 res4 pardiso rep3 exit=0 Wall time (loop)     : 17.402588 peakRSS=3151072kB
+16:38:42 res4 cudss rep3 exit=0 Wall time (loop)     : 11.046293 peakRSS=3145968kB
+16:40:26 res8 pardiso rep1 exit=0 Wall time (loop)     : 66.188155 peakRSS=12584908kB
+16:41:54 res8 cudss rep1 exit=0 Wall time (loop)     : 48.420466 peakRSS=11691388kB
+16:43:38 res8 pardiso rep2 exit=0 Wall time (loop)     : 65.159201 peakRSS=12583804kB
+16:45:06 res8 cudss rep2 exit=0 Wall time (loop)     : 49.326481 peakRSS=11691516kB
+16:46:51 res8 pardiso rep3 exit=0 Wall time (loop)     : 66.589830 peakRSS=12583000kB
+16:48:18 res8 cudss rep3 exit=0 Wall time (loop)     : 48.539465 peakRSS=11691152kB
+DONE

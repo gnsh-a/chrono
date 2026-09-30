@@ -1,0 +1,25 @@
+14:58:23 res0 pardiso rep1 exit=0 Wall time (loop)     : 1.597493 peakRSS=150980kB
+14:58:25 res0 cudss rep1 exit=0 Wall time (loop)     : 1.176806 peakRSS=466784kB
+14:58:27 res0 pardiso rep2 exit=0 Wall time (loop)     : 1.833487 peakRSS=150640kB
+14:58:28 res0 cudss rep2 exit=0 Wall time (loop)     : 0.993724 peakRSS=466616kB
+14:58:29 res0 pardiso rep3 exit=0 Wall time (loop)     : 1.191853 peakRSS=151288kB
+14:58:31 res0 cudss rep3 exit=0 Wall time (loop)     : 1.163731 peakRSS=466580kB
+14:58:46 res2 pardiso rep1 exit=0 Wall time (loop)     : 13.916091 peakRSS=1204348kB
+14:58:55 res2 cudss rep1 exit=0 Wall time (loop)     : 8.531725 peakRSS=1249708kB
+14:59:11 res2 pardiso rep2 exit=0 Wall time (loop)     : 14.292026 peakRSS=1204184kB
+14:59:19 res2 cudss rep2 exit=0 Wall time (loop)     : 6.591668 peakRSS=1248848kB
+14:59:34 res2 pardiso rep3 exit=0 Wall time (loop)     : 13.974411 peakRSS=1203616kB
+14:59:42 res2 cudss rep3 exit=0 Wall time (loop)     : 7.264361 peakRSS=1248952kB
+15:01:06 res4 pardiso rep1 exit=0 Wall time (loop)     : 78.379515 peakRSS=5891368kB
+15:01:43 res4 cudss rep1 exit=0 Wall time (loop)     : 31.722361 peakRSS=5111396kB
+15:03:05 res4 pardiso rep2 exit=0 Wall time (loop)     : 76.200062 peakRSS=5890724kB
+15:03:42 res4 cudss rep2 exit=0 Wall time (loop)     : 31.960676 peakRSS=5110768kB
+15:05:05 res4 pardiso rep3 exit=0 Wall time (loop)     : 76.971151 peakRSS=5890960kB
+15:05:41 res4 cudss rep3 exit=0 Wall time (loop)     : 30.509747 peakRSS=5111096kB
+15:08:26 res8 pardiso rep1 exit=0 Wall time (loop)     : 154.238448 peakRSS=11750060kB
+15:09:38 res8 cudss rep1 exit=0 Wall time (loop)     : 60.993356 peakRSS=9937292kB
+15:12:26 res8 pardiso rep2 exit=0 Wall time (loop)     : 158.047859 peakRSS=11748804kB
+15:13:39 res8 cudss rep2 exit=0 Wall time (loop)     : 61.571653 peakRSS=9937812kB
+15:16:24 res8 pardiso rep3 exit=0 Wall time (loop)     : 154.678280 peakRSS=11747436kB
+15:17:38 res8 cudss rep3 exit=0 Wall time (loop)     : 62.699125 peakRSS=9937540kB
+DONE
