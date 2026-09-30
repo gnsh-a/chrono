@@ -98,7 +98,7 @@ bool ChSolverCuDSS::FactorizeMatrix(bool analyze) {
         if (!cudss_check(cudssMatrixCreateCsr(
                 &m_mat_A, (int64_t)n, (int64_t)n, (int64_t)nnz,
                 d_row_ptr, nullptr, d_col_ind, d_values,
-                CUDA_R_32I, CUDA_R_64F,
+                CUDSS_R_32I, CUDSS_R_32I, CUDSS_R_64F,
                 CUDSS_MTYPE_GENERAL, CUDSS_MVIEW_FULL, CUDSS_BASE_ZERO), m_last_status)) return false;
 
         {
@@ -132,9 +132,9 @@ bool ChSolverCuDSS::SolveSystem() {
     // Recreate dense vector descriptors (hopefully avoids stale pointer issues[need to test])
     // ToDo: leave for now, modify after chrono chage
     if (!m_mat_x)
-        if (!cudss_check(cudssMatrixCreateDn(&m_mat_x, n, 1, n, d_x, CUDA_R_64F, CUDSS_LAYOUT_COL_MAJOR), m_last_status)) return false;
+        if (!cudss_check(cudssMatrixCreateDn(&m_mat_x, n, 1, n, d_x, CUDSS_R_64F, CUDSS_LAYOUT_COL_MAJOR), m_last_status)) return false;
     if (!m_mat_b)
-        if (!cudss_check(cudssMatrixCreateDn(&m_mat_b, n, 1, n, d_b, CUDA_R_64F, CUDSS_LAYOUT_COL_MAJOR), m_last_status)) return false;
+        if (!cudss_check(cudssMatrixCreateDn(&m_mat_b, n, 1, n, d_b, CUDSS_R_64F, CUDSS_LAYOUT_COL_MAJOR), m_last_status)) return false;
 
     {
         CuDSSTimer timer(this->verbose, "Solve");
@@ -210,7 +210,7 @@ bool ChSolverComplexCuDSS::FactorizeMatrix() {
         if (!cudss_check(cudssMatrixCreateCsr(
                 &m_mat_A, (int64_t)n, (int64_t)n, (int64_t)nnz,
                 d_row_ptr, nullptr, d_col_ind, d_values,
-                CUDA_R_32I, CUDA_C_64F,
+                CUDSS_R_32I, CUDSS_R_32I, CUDSS_C_64F,
                 CUDSS_MTYPE_GENERAL, CUDSS_MVIEW_FULL, CUDSS_BASE_ZERO), m_last_status)) return false;
 
         {
@@ -237,9 +237,9 @@ bool ChSolverComplexCuDSS::SolveSystem(const ChVectorDynamic<std::complex<double
     cudaMemcpy(d_b, b.data(), n * sizeof(cuDoubleComplex), cudaMemcpyHostToDevice);
 
     if (!m_mat_x)
-        if (!cudss_check(cudssMatrixCreateDn(&m_mat_x, n, 1, n, d_x, CUDA_C_64F, CUDSS_LAYOUT_COL_MAJOR), m_last_status)) return false;
+        if (!cudss_check(cudssMatrixCreateDn(&m_mat_x, n, 1, n, d_x, CUDSS_C_64F, CUDSS_LAYOUT_COL_MAJOR), m_last_status)) return false;
     if (!m_mat_b)
-        if (!cudss_check(cudssMatrixCreateDn(&m_mat_b, n, 1, n, d_b, CUDA_C_64F, CUDSS_LAYOUT_COL_MAJOR), m_last_status)) return false;
+        if (!cudss_check(cudssMatrixCreateDn(&m_mat_b, n, 1, n, d_b, CUDSS_C_64F, CUDSS_LAYOUT_COL_MAJOR), m_last_status)) return false;
 
     {
         CuDSSTimer timer(this->verbose, "Solve");
