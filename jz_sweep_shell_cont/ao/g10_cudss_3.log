@@ -1,0 +1,245 @@
+OpenMP enabled (max_threads=16)
+Thread settings: nthreads=16 (chrono/collision/eigen)
+  analyze_once : yes
+ANCF 3443 cantilever shell demo
+  integration  : ContInt
+  solver       : CUSTOM
+  res          : 0 (10x10 elements)
+  elements     : 100
+  nodes        : 121
+  tip_nodes    : 11
+  x_size,y_size: 4, 2 m
+  dx, dy       : 0.4, 0.2 m
+  thickness    : 0.1 m
+  tip_force_z  : -500 N (total, distributed over 11 nodes)
+  schedule     : Fz=const for steps 0..4, then Fz=0 for steps 5..9
+  dt           : 0.0005 s
+  steps        : 10 (t_end=0.005 s)
+
+  CuDSS Analysis Phase... Done in 14.9637 ms.
+  CuDSS Factorization Phase... Done in 9.44682 ms.
+  Solver setup [0] n = 1507  nnz = 138769
+     analyze?        1
+     use learner?    1
+     pattern locked? 1
+     call learner?   1
+     call reserve?   0
+     timer assembly matrix:   0.0197948 s
+     timer analyze+factorize: 0.0248178 s
+  CuDSS Solve Phase... Done in 1.5831 ms.
+  Solver solve [0]  |residual| = 6.41365e-17
+  CuDSS Refactorization Phase... Done in 1.61043 ms.
+  Solver setup [1] n = 1507  nnz = 138769
+     analyze?        0
+     use learner?    1
+     pattern locked? 1
+     call learner?   0
+     call reserve?   0
+     timer assembly matrix:   0.0231435 s
+     timer analyze+factorize: 0.0265692 s
+  CuDSS Solve Phase... Done in 0.160768 ms.
+  Solver solve [1]  |residual| = 2.5127e-21
+  CuDSS Refactorization Phase... Done in 1.5801 ms.
+  Solver setup [2] n = 1507  nnz = 138769
+     analyze?        0
+     use learner?    1
+     pattern locked? 1
+     call learner?   0
+     call reserve?   0
+     timer assembly matrix:   0.0264078 s
+     timer analyze+factorize: 0.0282728 s
+  CuDSS Solve Phase... Done in 0.159744 ms.
+  Solver solve [2]  |residual| = 4.97757e-17
+  CuDSS Refactorization Phase... Done in 1.60387 ms.
+  Solver setup [3] n = 1507  nnz = 138769
+     analyze?        0
+     use learner?    1
+     pattern locked? 1
+     call learner?   0
+     call reserve?   0
+     timer assembly matrix:   0.0296402 s
+     timer analyze+factorize: 0.0300041 s
+  CuDSS Solve Phase... Done in 0.160768 ms.
+  Solver solve [3]  |residual| = 4.74909e-22
+  CuDSS Refactorization Phase... Done in 1.52349 ms.
+  Solver setup [4] n = 1507  nnz = 138769
+     analyze?        0
+     use learner?    1
+     pattern locked? 1
+     call learner?   0
+     call reserve?   0
+     timer assembly matrix:   0.0328941 s
+     timer analyze+factorize: 0.031655 s
+  CuDSS Solve Phase... Done in 0.15872 ms.
+  Solver solve [4]  |residual| = 3.32573e-17
+  CuDSS Refactorization Phase... Done in 1.65875 ms.
+  Solver setup [5] n = 1507  nnz = 138769
+     analyze?        0
+     use learner?    1
+     pattern locked? 1
+     call learner?   0
+     call reserve?   0
+     timer assembly matrix:   0.0361398 s
+     timer analyze+factorize: 0.0334365 s
+  CuDSS Solve Phase... Done in 0.15872 ms.
+  Solver solve [5]  |residual| = 2.09636e-22
+  CuDSS Refactorization Phase... Done in 1.56816 ms.
+  Solver setup [6] n = 1507  nnz = 138769
+     analyze?        0
+     use learner?    1
+     pattern locked? 1
+     call learner?   0
+     call reserve?   0
+     timer assembly matrix:   0.0393776 s
+     timer analyze+factorize: 0.0351263 s
+  CuDSS Solve Phase... Done in 0.158592 ms.
+  Solver solve [6]  |residual| = 4.56784e-17
+  CuDSS Refactorization Phase... Done in 1.57926 ms.
+  Solver setup [7] n = 1507  nnz = 138769
+     analyze?        0
+     use learner?    1
+     pattern locked? 1
+     call learner?   0
+     call reserve?   0
+     timer assembly matrix:   0.0426142 s
+     timer analyze+factorize: 0.0368259 s
+  CuDSS Solve Phase... Done in 0.156672 ms.
+  Solver solve [7]  |residual| = 1.30228e-22
+  CuDSS Refactorization Phase... Done in 1.6433 ms.
+  Solver setup [8] n = 1507  nnz = 138769
+     analyze?        0
+     use learner?    1
+     pattern locked? 1
+     call learner?   0
+     call reserve?   0
+     timer assembly matrix:   0.0458609 s
+     timer analyze+factorize: 0.0386047 s
+  CuDSS Solve Phase... Done in 0.158496 ms.
+  Solver solve [8]  |residual| = 1.12214e-16
+  CuDSS Refactorization Phase... Done in 1.63482 ms.
+  Solver setup [9] n = 1507  nnz = 138769
+     analyze?        0
+     use learner?    1
+     pattern locked? 1
+     call learner?   0
+     call reserve?   0
+     timer assembly matrix:   0.049093 s
+     timer analyze+factorize: 0.0403817 s
+  CuDSS Solve Phase... Done in 0.15872 ms.
+  Solver solve [9]  |residual| = 3.47454e-21
+  CuDSS Refactorization Phase... Done in 1.59872 ms.
+  Solver setup [10] n = 1507  nnz = 138769
+     analyze?        0
+     use learner?    1
+     pattern locked? 1
+     call learner?   0
+     call reserve?   0
+     timer assembly matrix:   0.0523091 s
+     timer analyze+factorize: 0.0421098 s
+  CuDSS Solve Phase... Done in 0.159552 ms.
+  Solver solve [10]  |residual| = 8.21308e-17
+  CuDSS Refactorization Phase... Done in 1.59939 ms.
+  Solver setup [11] n = 1507  nnz = 138769
+     analyze?        0
+     use learner?    1
+     pattern locked? 1
+     call learner?   0
+     call reserve?   0
+     timer assembly matrix:   0.0555192 s
+     timer analyze+factorize: 0.0438293 s
+  CuDSS Solve Phase... Done in 0.15872 ms.
+  Solver solve [11]  |residual| = 1.08655e-21
+  CuDSS Refactorization Phase... Done in 1.61104 ms.
+  Solver setup [12] n = 1507  nnz = 138769
+     analyze?        0
+     use learner?    1
+     pattern locked? 1
+     call learner?   0
+     call reserve?   0
+     timer assembly matrix:   0.0587322 s
+     timer analyze+factorize: 0.0455636 s
+  CuDSS Solve Phase... Done in 0.157696 ms.
+  Solver solve [12]  |residual| = 3.46301e-17
+  CuDSS Refactorization Phase... Done in 1.5817 ms.
+  Solver setup [13] n = 1507  nnz = 138769
+     analyze?        0
+     use learner?    1
+     pattern locked? 1
+     call learner?   0
+     call reserve?   0
+     timer assembly matrix:   0.0619617 s
+     timer analyze+factorize: 0.0472694 s
+  CuDSS Solve Phase... Done in 0.157696 ms.
+  Solver solve [13]  |residual| = 1.07345e-21
+  CuDSS Refactorization Phase... Done in 1.62496 ms.
+  Solver setup [14] n = 1507  nnz = 138769
+     analyze?        0
+     use learner?    1
+     pattern locked? 1
+     call learner?   0
+     call reserve?   0
+     timer assembly matrix:   0.0651814 s
+     timer analyze+factorize: 0.0490189 s
+  CuDSS Solve Phase... Done in 0.15856 ms.
+  Solver solve [14]  |residual| = 2.43584e-17
+  CuDSS Refactorization Phase... Done in 1.57283 ms.
+  Solver setup [15] n = 1507  nnz = 138769
+     analyze?        0
+     use learner?    1
+     pattern locked? 1
+     call learner?   0
+     call reserve?   0
+     timer assembly matrix:   0.0684072 s
+     timer analyze+factorize: 0.0507154 s
+  CuDSS Solve Phase... Done in 0.157696 ms.
+  Solver solve [15]  |residual| = 2.8138e-21
+  CuDSS Refactorization Phase... Done in 1.54454 ms.
+  Solver setup [16] n = 1507  nnz = 138769
+     analyze?        0
+     use learner?    1
+     pattern locked? 1
+     call learner?   0
+     call reserve?   0
+     timer assembly matrix:   0.0716268 s
+     timer analyze+factorize: 0.0523793 s
+  CuDSS Solve Phase... Done in 0.15872 ms.
+  Solver solve [16]  |residual| = 3.21702e-17
+  CuDSS Refactorization Phase... Done in 1.57184 ms.
+  Solver setup [17] n = 1507  nnz = 138769
+     analyze?        0
+     use learner?    1
+     pattern locked? 1
+     call learner?   0
+     call reserve?   0
+     timer assembly matrix:   0.0748423 s
+     timer analyze+factorize: 0.0540706 s
+  CuDSS Solve Phase... Done in 0.157696 ms.
+  Solver solve [17]  |residual| = 5.72886e-21
+  CuDSS Refactorization Phase... Done in 1.57702 ms.
+  Solver setup [18] n = 1507  nnz = 138769
+     analyze?        0
+     use learner?    1
+     pattern locked? 1
+     call learner?   0
+     call reserve?   0
+     timer assembly matrix:   0.0780635 s
+     timer analyze+factorize: 0.0557704 s
+  CuDSS Solve Phase... Done in 0.158368 ms.
+  Solver solve [18]  |residual| = 2.89922e-17
+  CuDSS Refactorization Phase... Done in 1.59382 ms.
+  Solver setup [19] n = 1507  nnz = 138769
+     analyze?        0
+     use learner?    1
+     pattern locked? 1
+     call learner?   0
+     call reserve?   0
+     timer assembly matrix:   0.0812726 s
+     timer analyze+factorize: 0.0574877 s
+  CuDSS Solve Phase... Done in 0.158368 ms.
+  Solver solve [19]  |residual| = 1.2034e-20
+Wall time (loop)     : 0.163409 s
+Simulation time      : 0.005000 s
+RTF (wall/sim)       : 32.681785
+
+Final avg tip pos    : (4.000000, 1.000000, -0.000043) m
+peakRSS=392368kB total=0.35s

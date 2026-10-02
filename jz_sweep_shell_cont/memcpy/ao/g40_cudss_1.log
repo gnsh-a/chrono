@@ -1,0 +1,304 @@
+OpenMP enabled (max_threads=16)
+Thread settings: nthreads=16 (chrono/collision/eigen)
+  analyze_once : yes
+ANCF 3443 cantilever shell demo
+  integration  : ContInt
+  solver       : CUSTOM
+  res          : 0 (40x40 elements)
+  elements     : 1600
+  nodes        : 1681
+  tip_nodes    : 41
+  x_size,y_size: 4, 2 m
+  dx, dy       : 0.1, 0.05 m
+  thickness    : 0.1 m
+  tip_force_z  : -500 N (total, distributed over 41 nodes)
+  schedule     : Fz=const for steps 0..4, then Fz=0 for steps 5..9
+  dt           : 0.0005 s
+  steps        : 10 (t_end=0.005 s)
+
+  CuDSS CopyMatrixH2D Phase... Done in 2.59712 ms.
+  CuDSS Analysis Phase... Done in 47.5169 ms.
+  CuDSS Factorization Phase... Done in 31.1769 ms.
+  Solver setup [0] n = 20377  nnz = 2109739
+     analyze?        1
+     use learner?    1
+     pattern locked? 1
+     call learner?   1
+     call reserve?   0
+     timer assembly matrix:   0.325211 s
+     timer analyze+factorize: 0.0819217 s
+  CuDSS CopyRhsH2D Phase... Done in 0.025088 ms.
+  CuDSS Solve Phase... Done in 4.8041 ms.
+  CuDSS CopySolD2H Phase... Done in 0.033888 ms.
+  Solver solve [0]  |residual| = 1.60498e-16
+  CuDSS CopyMatrixH2D Phase... Done in 2.12602 ms.
+  CuDSS Refactorization Phase... Done in 26.2038 ms.
+  Solver setup [1] n = 20377  nnz = 2109739
+     analyze?        0
+     use learner?    1
+     pattern locked? 1
+     call learner?   0
+     call reserve?   0
+     timer assembly matrix:   0.362671 s
+     timer analyze+factorize: 0.110329 s
+  CuDSS CopyRhsH2D Phase... Done in 0.02496 ms.
+  CuDSS Solve Phase... Done in 0.664 ms.
+  CuDSS CopySolD2H Phase... Done in 0.03008 ms.
+  Solver solve [1]  |residual| = 3.69864e-21
+  CuDSS CopyMatrixH2D Phase... Done in 1.59117 ms.
+  CuDSS Refactorization Phase... Done in 25.161 ms.
+  Solver setup [2] n = 20377  nnz = 2109739
+     analyze?        0
+     use learner?    1
+     pattern locked? 1
+     call learner?   0
+     call reserve?   0
+     timer assembly matrix:   0.397477 s
+     timer analyze+factorize: 0.137134 s
+  CuDSS CopyRhsH2D Phase... Done in 0.021088 ms.
+  CuDSS Solve Phase... Done in 0.66448 ms.
+  CuDSS CopySolD2H Phase... Done in 0.031008 ms.
+  Solver solve [2]  |residual| = 2.07304e-16
+  CuDSS CopyMatrixH2D Phase... Done in 1.62909 ms.
+  CuDSS Refactorization Phase... Done in 26.2312 ms.
+  Solver setup [3] n = 20377  nnz = 2109739
+     analyze?        0
+     use learner?    1
+     pattern locked? 1
+     call learner?   0
+     call reserve?   0
+     timer assembly matrix:   0.431892 s
+     timer analyze+factorize: 0.165047 s
+  CuDSS CopyRhsH2D Phase... Done in 0.02336 ms.
+  CuDSS Solve Phase... Done in 0.661248 ms.
+  CuDSS CopySolD2H Phase... Done in 0.035104 ms.
+  Solver solve [3]  |residual| = 8.34804e-22
+  CuDSS CopyMatrixH2D Phase... Done in 1.61363 ms.
+  CuDSS Refactorization Phase... Done in 25.3934 ms.
+  Solver setup [4] n = 20377  nnz = 2109739
+     analyze?        0
+     use learner?    1
+     pattern locked? 1
+     call learner?   0
+     call reserve?   0
+     timer assembly matrix:   0.466403 s
+     timer analyze+factorize: 0.19211 s
+  CuDSS CopyRhsH2D Phase... Done in 0.022592 ms.
+  CuDSS Solve Phase... Done in 0.661088 ms.
+  CuDSS CopySolD2H Phase... Done in 0.030464 ms.
+  Solver solve [4]  |residual| = 2.35138e-16
+  CuDSS CopyMatrixH2D Phase... Done in 1.72294 ms.
+  CuDSS Refactorization Phase... Done in 25.6201 ms.
+  Solver setup [5] n = 20377  nnz = 2109739
+     analyze?        0
+     use learner?    1
+     pattern locked? 1
+     call learner?   0
+     call reserve?   0
+     timer assembly matrix:   0.501158 s
+     timer analyze+factorize: 0.219502 s
+  CuDSS CopyRhsH2D Phase... Done in 0.022144 ms.
+  CuDSS Solve Phase... Done in 0.657056 ms.
+  CuDSS CopySolD2H Phase... Done in 0.031136 ms.
+  Solver solve [5]  |residual| = 5.41413e-22
+  CuDSS CopyMatrixH2D Phase... Done in 1.63686 ms.
+  CuDSS Refactorization Phase... Done in 26.2362 ms.
+  Solver setup [6] n = 20377  nnz = 2109739
+     analyze?        0
+     use learner?    1
+     pattern locked? 1
+     call learner?   0
+     call reserve?   0
+     timer assembly matrix:   0.536028 s
+     timer analyze+factorize: 0.24744 s
+  CuDSS CopyRhsH2D Phase... Done in 0.023168 ms.
+  CuDSS Solve Phase... Done in 0.658144 ms.
+  CuDSS CopySolD2H Phase... Done in 0.028448 ms.
+  Solver solve [6]  |residual| = 2.27843e-16
+  CuDSS CopyMatrixH2D Phase... Done in 1.60637 ms.
+  CuDSS Refactorization Phase... Done in 26.2456 ms.
+  Solver setup [7] n = 20377  nnz = 2109739
+     analyze?        0
+     use learner?    1
+     pattern locked? 1
+     call learner?   0
+     call reserve?   0
+     timer assembly matrix:   0.571148 s
+     timer analyze+factorize: 0.275346 s
+  CuDSS CopyRhsH2D Phase... Done in 0.021696 ms.
+  CuDSS Solve Phase... Done in 0.65872 ms.
+  CuDSS CopySolD2H Phase... Done in 0.029248 ms.
+  Solver solve [7]  |residual| = 3.8416e-22
+  CuDSS CopyMatrixH2D Phase... Done in 1.59939 ms.
+  CuDSS Refactorization Phase... Done in 26.1229 ms.
+  Solver setup [8] n = 20377  nnz = 2109739
+     analyze?        0
+     use learner?    1
+     pattern locked? 1
+     call learner?   0
+     call reserve?   0
+     timer assembly matrix:   0.605829 s
+     timer analyze+factorize: 0.303125 s
+  CuDSS CopyRhsH2D Phase... Done in 0.022816 ms.
+  CuDSS Solve Phase... Done in 0.661248 ms.
+  CuDSS CopySolD2H Phase... Done in 0.03024 ms.
+  Solver solve [8]  |residual| = 1.9079e-16
+  CuDSS CopyMatrixH2D Phase... Done in 1.62694 ms.
+  CuDSS Refactorization Phase... Done in 25.5694 ms.
+  Solver setup [9] n = 20377  nnz = 2109739
+     analyze?        0
+     use learner?    1
+     pattern locked? 1
+     call learner?   0
+     call reserve?   0
+     timer assembly matrix:   0.640624 s
+     timer analyze+factorize: 0.330374 s
+  CuDSS CopyRhsH2D Phase... Done in 0.022176 ms.
+  CuDSS Solve Phase... Done in 0.663584 ms.
+  CuDSS CopySolD2H Phase... Done in 0.029504 ms.
+  Solver solve [9]  |residual| = 3.26303e-21
+  CuDSS CopyMatrixH2D Phase... Done in 1.59088 ms.
+  CuDSS Refactorization Phase... Done in 25.313 ms.
+  Solver setup [10] n = 20377  nnz = 2109739
+     analyze?        0
+     use learner?    1
+     pattern locked? 1
+     call learner?   0
+     call reserve?   0
+     timer assembly matrix:   0.675554 s
+     timer analyze+factorize: 0.357337 s
+  CuDSS CopyRhsH2D Phase... Done in 0.022528 ms.
+  CuDSS Solve Phase... Done in 0.66112 ms.
+  CuDSS CopySolD2H Phase... Done in 0.029376 ms.
+  Solver solve [10]  |residual| = 1.65522e-16
+  CuDSS CopyMatrixH2D Phase... Done in 1.62509 ms.
+  CuDSS Refactorization Phase... Done in 25.9543 ms.
+  Solver setup [11] n = 20377  nnz = 2109739
+     analyze?        0
+     use learner?    1
+     pattern locked? 1
+     call learner?   0
+     call reserve?   0
+     timer assembly matrix:   0.710761 s
+     timer analyze+factorize: 0.384977 s
+  CuDSS CopyRhsH2D Phase... Done in 0.022624 ms.
+  CuDSS Solve Phase... Done in 0.660064 ms.
+  CuDSS CopySolD2H Phase... Done in 0.029504 ms.
+  Solver solve [11]  |residual| = 9.89995e-22
+  CuDSS CopyMatrixH2D Phase... Done in 1.61338 ms.
+  CuDSS Refactorization Phase... Done in 25.8781 ms.
+  Solver setup [12] n = 20377  nnz = 2109739
+     analyze?        0
+     use learner?    1
+     pattern locked? 1
+     call learner?   0
+     call reserve?   0
+     timer assembly matrix:   0.745308 s
+     timer analyze+factorize: 0.412526 s
+  CuDSS CopyRhsH2D Phase... Done in 0.02224 ms.
+  CuDSS Solve Phase... Done in 0.6592 ms.
+  CuDSS CopySolD2H Phase... Done in 0.03008 ms.
+  Solver solve [12]  |residual| = 1.60844e-16
+  CuDSS CopyMatrixH2D Phase... Done in 1.59898 ms.
+  CuDSS Refactorization Phase... Done in 26.0663 ms.
+  Solver setup [13] n = 20377  nnz = 2109739
+     analyze?        0
+     use learner?    1
+     pattern locked? 1
+     call learner?   0
+     call reserve?   0
+     timer assembly matrix:   0.780046 s
+     timer analyze+factorize: 0.440254 s
+  CuDSS CopyRhsH2D Phase... Done in 0.0208 ms.
+  CuDSS Solve Phase... Done in 0.657824 ms.
+  CuDSS CopySolD2H Phase... Done in 0.029664 ms.
+  Solver solve [13]  |residual| = 4.71378e-22
+  CuDSS CopyMatrixH2D Phase... Done in 1.66864 ms.
+  CuDSS Refactorization Phase... Done in 27.6207 ms.
+  Solver setup [14] n = 20377  nnz = 2109739
+     analyze?        0
+     use learner?    1
+     pattern locked? 1
+     call learner?   0
+     call reserve?   0
+     timer assembly matrix:   0.815103 s
+     timer analyze+factorize: 0.469634 s
+  CuDSS CopyRhsH2D Phase... Done in 0.056768 ms.
+  CuDSS Solve Phase... Done in 0.710144 ms.
+  CuDSS CopySolD2H Phase... Done in 0.041088 ms.
+  Solver solve [14]  |residual| = 1.55378e-16
+  CuDSS CopyMatrixH2D Phase... Done in 1.60538 ms.
+  CuDSS Refactorization Phase... Done in 25.9085 ms.
+  Solver setup [15] n = 20377  nnz = 2109739
+     analyze?        0
+     use learner?    1
+     pattern locked? 1
+     call learner?   0
+     call reserve?   0
+     timer assembly matrix:   0.849891 s
+     timer analyze+factorize: 0.497205 s
+  CuDSS CopyRhsH2D Phase... Done in 0.022432 ms.
+  CuDSS Solve Phase... Done in 0.664224 ms.
+  CuDSS CopySolD2H Phase... Done in 0.029888 ms.
+  Solver solve [15]  |residual| = 2.92446e-22
+  CuDSS CopyMatrixH2D Phase... Done in 1.59898 ms.
+  CuDSS Refactorization Phase... Done in 25.7656 ms.
+  Solver setup [16] n = 20377  nnz = 2109739
+     analyze?        0
+     use learner?    1
+     pattern locked? 1
+     call learner?   0
+     call reserve?   0
+     timer assembly matrix:   0.88446 s
+     timer analyze+factorize: 0.524623 s
+  CuDSS CopyRhsH2D Phase... Done in 0.022784 ms.
+  CuDSS Solve Phase... Done in 0.657568 ms.
+  CuDSS CopySolD2H Phase... Done in 0.029312 ms.
+  Solver solve [16]  |residual| = 1.27791e-16
+  CuDSS CopyMatrixH2D Phase... Done in 1.57974 ms.
+  CuDSS Refactorization Phase... Done in 25.9551 ms.
+  Solver setup [17] n = 20377  nnz = 2109739
+     analyze?        0
+     use learner?    1
+     pattern locked? 1
+     call learner?   0
+     call reserve?   0
+     timer assembly matrix:   0.919554 s
+     timer analyze+factorize: 0.55222 s
+  CuDSS CopyRhsH2D Phase... Done in 0.022304 ms.
+  CuDSS Solve Phase... Done in 0.659328 ms.
+  CuDSS CopySolD2H Phase... Done in 0.029888 ms.
+  Solver solve [17]  |residual| = 2.17331e-22
+  CuDSS CopyMatrixH2D Phase... Done in 1.65126 ms.
+  CuDSS Refactorization Phase... Done in 25.9685 ms.
+  Solver setup [18] n = 20377  nnz = 2109739
+     analyze?        0
+     use learner?    1
+     pattern locked? 1
+     call learner?   0
+     call reserve?   0
+     timer assembly matrix:   0.954192 s
+     timer analyze+factorize: 0.579904 s
+  CuDSS CopyRhsH2D Phase... Done in 0.023456 ms.
+  CuDSS Solve Phase... Done in 0.659104 ms.
+  CuDSS CopySolD2H Phase... Done in 0.0296 ms.
+  Solver solve [18]  |residual| = 1.2309e-16
+  CuDSS CopyMatrixH2D Phase... Done in 1.58518 ms.
+  CuDSS Refactorization Phase... Done in 25.5992 ms.
+  Solver setup [19] n = 20377  nnz = 2109739
+     analyze?        0
+     use learner?    1
+     pattern locked? 1
+     call learner?   0
+     call reserve?   0
+     timer assembly matrix:   0.988742 s
+     timer analyze+factorize: 0.607142 s
+  CuDSS CopyRhsH2D Phase... Done in 0.022688 ms.
+  CuDSS Solve Phase... Done in 0.6584 ms.
+  CuDSS CopySolD2H Phase... Done in 0.030336 ms.
+  Solver solve [19]  |residual| = 1.81138e-22
+Wall time (loop)     : 1.853464 s
+Simulation time      : 0.005000 s
+RTF (wall/sim)       : 370.692799
+
+Final avg tip pos    : (4.000000, 1.000000, -0.000046) m

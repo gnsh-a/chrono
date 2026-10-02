@@ -1,0 +1,276 @@
+OpenMP enabled (max_threads=16)
+Thread settings: nthreads=16 (chrono/collision/eigen)
+  analyze_once : no
+ANCF 3443 cantilever shell demo
+  integration  : ContInt
+  solver       : PARDISO_MKL
+  res          : 0 (70x70 elements)
+  elements     : 4900
+  nodes        : 5041
+  tip_nodes    : 71
+  x_size,y_size: 4, 2 m
+  dx, dy       : 0.0571429, 0.0285714 m
+  thickness    : 0.1 m
+  tip_force_z  : -500 N (total, distributed over 71 nodes)
+  schedule     : Fz=const for steps 0..4, then Fz=0 for steps 5..9
+  dt           : 0.0005 s
+  steps        : 10 (t_end=0.005 s)
+
+  PARDISO Analysis Phase... Done in 217.883 ms.
+  PARDISO Factorization Phase... Done in 141.95 ms.
+  Solver setup [0] n = 60847  nnz = 6413509
+     analyze?        1
+     use learner?    1
+     pattern locked? 1
+     call learner?   1
+     call reserve?   0
+     timer assembly matrix:   0.958797 s
+     timer analyze+factorize: 0.359926 s
+  PARDISO Solve Phase... Done in 84.4743 ms.
+  Solver solve [0]  |residual| = 1.68628e-16
+  PARDISO Analysis Phase... Done in 221.41 ms.
+  PARDISO Factorization Phase... Done in 141.439 ms.
+  Solver setup [1] n = 60847  nnz = 6413509
+     analyze?        1
+     use learner?    1
+     pattern locked? 1
+     call learner?   0
+     call reserve?   0
+     timer assembly matrix:   1.12955 s
+     timer analyze+factorize: 0.722835 s
+  PARDISO Solve Phase... Done in 66.4837 ms.
+  Solver solve [1]  |residual| = 3.08484e-21
+  PARDISO Analysis Phase... Done in 213.862 ms.
+  PARDISO Factorization Phase... Done in 136.415 ms.
+  Solver setup [2] n = 60847  nnz = 6413509
+     analyze?        1
+     use learner?    1
+     pattern locked? 1
+     call learner?   0
+     call reserve?   0
+     timer assembly matrix:   1.23663 s
+     timer analyze+factorize: 1.07317 s
+  PARDISO Solve Phase... Done in 66.1367 ms.
+  Solver solve [2]  |residual| = 2.35202e-16
+  PARDISO Analysis Phase... Done in 216.464 ms.
+  PARDISO Factorization Phase... Done in 138.074 ms.
+  Solver setup [3] n = 60847  nnz = 6413509
+     analyze?        1
+     use learner?    1
+     pattern locked? 1
+     call learner?   0
+     call reserve?   0
+     timer assembly matrix:   1.34382 s
+     timer analyze+factorize: 1.42777 s
+  PARDISO Solve Phase... Done in 66.5892 ms.
+  Solver solve [3]  |residual| = 9.2199e-22
+  PARDISO Analysis Phase... Done in 211.43 ms.
+  PARDISO Factorization Phase... Done in 138.041 ms.
+  Solver setup [4] n = 60847  nnz = 6413509
+     analyze?        1
+     use learner?    1
+     pattern locked? 1
+     call learner?   0
+     call reserve?   0
+     timer assembly matrix:   1.45029 s
+     timer analyze+factorize: 1.77728 s
+  PARDISO Solve Phase... Done in 66.475 ms.
+  Solver solve [4]  |residual| = 2.73044e-16
+  PARDISO Analysis Phase... Done in 216.06 ms.
+  PARDISO Factorization Phase... Done in 145.515 ms.
+  Solver setup [5] n = 60847  nnz = 6413509
+     analyze?        1
+     use learner?    1
+     pattern locked? 1
+     call learner?   0
+     call reserve?   0
+     timer assembly matrix:   1.55774 s
+     timer analyze+factorize: 2.13892 s
+  PARDISO Solve Phase... Done in 66.7556 ms.
+  Solver solve [5]  |residual| = 5.26239e-22
+  PARDISO Analysis Phase... Done in 243.959 ms.
+  PARDISO Factorization Phase... Done in 144.499 ms.
+  Solver setup [6] n = 60847  nnz = 6413509
+     analyze?        1
+     use learner?    1
+     pattern locked? 1
+     call learner?   0
+     call reserve?   0
+     timer assembly matrix:   1.66446 s
+     timer analyze+factorize: 2.52745 s
+  PARDISO Solve Phase... Done in 83.4082 ms.
+  Solver solve [6]  |residual| = 2.59016e-16
+  PARDISO Analysis Phase... Done in 256.967 ms.
+  PARDISO Factorization Phase... Done in 140.333 ms.
+  Solver setup [7] n = 60847  nnz = 6413509
+     analyze?        1
+     use learner?    1
+     pattern locked? 1
+     call learner?   0
+     call reserve?   0
+     timer assembly matrix:   1.83469 s
+     timer analyze+factorize: 2.92483 s
+  PARDISO Solve Phase... Done in 82.9048 ms.
+  Solver solve [7]  |residual| = 3.96872e-22
+  PARDISO Analysis Phase... Done in 261.818 ms.
+  PARDISO Factorization Phase... Done in 141.594 ms.
+  Solver setup [8] n = 60847  nnz = 6413509
+     analyze?        1
+     use learner?    1
+     pattern locked? 1
+     call learner?   0
+     call reserve?   0
+     timer assembly matrix:   2.00403 s
+     timer analyze+factorize: 3.32833 s
+  PARDISO Solve Phase... Done in 82.6954 ms.
+  Solver solve [8]  |residual| = 2.11509e-16
+  PARDISO Analysis Phase... Done in 247.472 ms.
+  PARDISO Factorization Phase... Done in 141.611 ms.
+  Solver setup [9] n = 60847  nnz = 6413509
+     analyze?        1
+     use learner?    1
+     pattern locked? 1
+     call learner?   0
+     call reserve?   0
+     timer assembly matrix:   2.17572 s
+     timer analyze+factorize: 3.7175 s
+  PARDISO Solve Phase... Done in 84.0336 ms.
+  Solver solve [9]  |residual| = 3.28089e-21
+  PARDISO Analysis Phase... Done in 262.728 ms.
+  PARDISO Factorization Phase... Done in 141.368 ms.
+  Solver setup [10] n = 60847  nnz = 6413509
+     analyze?        1
+     use learner?    1
+     pattern locked? 1
+     call learner?   0
+     call reserve?   0
+     timer assembly matrix:   2.34793 s
+     timer analyze+factorize: 4.12167 s
+  PARDISO Solve Phase... Done in 82.7248 ms.
+  Solver solve [10]  |residual| = 1.85369e-16
+  PARDISO Analysis Phase... Done in 259.81 ms.
+  PARDISO Factorization Phase... Done in 140.304 ms.
+  Solver setup [11] n = 60847  nnz = 6413509
+     analyze?        1
+     use learner?    1
+     pattern locked? 1
+     call learner?   0
+     call reserve?   0
+     timer assembly matrix:   2.51735 s
+     timer analyze+factorize: 4.52186 s
+  PARDISO Solve Phase... Done in 82.8446 ms.
+  Solver solve [11]  |residual| = 8.72877e-22
+  PARDISO Analysis Phase... Done in 262.13 ms.
+  PARDISO Factorization Phase... Done in 141.681 ms.
+  Solver setup [12] n = 60847  nnz = 6413509
+     analyze?        1
+     use learner?    1
+     pattern locked? 1
+     call learner?   0
+     call reserve?   0
+     timer assembly matrix:   2.68799 s
+     timer analyze+factorize: 4.92576 s
+  PARDISO Solve Phase... Done in 84.3528 ms.
+  Solver solve [12]  |residual| = 6.32167e-25
+  PARDISO Analysis Phase... Done in 230.017 ms.
+  PARDISO Factorization Phase... Done in 138.068 ms.
+  Solver setup [13] n = 60847  nnz = 6413509
+     analyze?        1
+     use learner?    1
+     pattern locked? 1
+     call learner?   0
+     call reserve?   0
+     timer assembly matrix:   2.85696 s
+     timer analyze+factorize: 5.29392 s
+  PARDISO Solve Phase... Done in 83.9211 ms.
+  Solver solve [13]  |residual| = 1.80903e-16
+  PARDISO Analysis Phase... Done in 272.732 ms.
+  PARDISO Factorization Phase... Done in 140.715 ms.
+  Solver setup [14] n = 60847  nnz = 6413509
+     analyze?        1
+     use learner?    1
+     pattern locked? 1
+     call learner?   0
+     call reserve?   0
+     timer assembly matrix:   3.02619 s
+     timer analyze+factorize: 5.70744 s
+  PARDISO Solve Phase... Done in 84.0517 ms.
+  Solver solve [14]  |residual| = 4.65645e-22
+  PARDISO Analysis Phase... Done in 220.864 ms.
+  PARDISO Factorization Phase... Done in 139.791 ms.
+  Solver setup [15] n = 60847  nnz = 6413509
+     analyze?        1
+     use learner?    1
+     pattern locked? 1
+     call learner?   0
+     call reserve?   0
+     timer assembly matrix:   3.19589 s
+     timer analyze+factorize: 6.06817 s
+  PARDISO Solve Phase... Done in 68.7807 ms.
+  Solver solve [15]  |residual| = 1.60096e-16
+  PARDISO Analysis Phase... Done in 254.643 ms.
+  PARDISO Factorization Phase... Done in 147.839 ms.
+  Solver setup [16] n = 60847  nnz = 6413509
+     analyze?        1
+     use learner?    1
+     pattern locked? 1
+     call learner?   0
+     call reserve?   0
+     timer assembly matrix:   3.30647 s
+     timer analyze+factorize: 6.47073 s
+  PARDISO Solve Phase... Done in 83.9178 ms.
+  Solver solve [16]  |residual| = 3.10189e-22
+  PARDISO Analysis Phase... Done in 260.09 ms.
+  PARDISO Factorization Phase... Done in 142.793 ms.
+  Solver setup [17] n = 60847  nnz = 6413509
+     analyze?        1
+     use learner?    1
+     pattern locked? 1
+     call learner?   0
+     call reserve?   0
+     timer assembly matrix:   3.47509 s
+     timer analyze+factorize: 6.87369 s
+  PARDISO Solve Phase... Done in 83.8254 ms.
+  Solver solve [17]  |residual| = 1.40348e-16
+  PARDISO Analysis Phase... Done in 259.314 ms.
+  PARDISO Factorization Phase... Done in 142.541 ms.
+  Solver setup [18] n = 60847  nnz = 6413509
+     analyze?        1
+     use learner?    1
+     pattern locked? 1
+     call learner?   0
+     call reserve?   0
+     timer assembly matrix:   3.64389 s
+     timer analyze+factorize: 7.27563 s
+  PARDISO Solve Phase... Done in 83.7988 ms.
+  Solver solve [18]  |residual| = 2.08061e-22
+  PARDISO Analysis Phase... Done in 256.272 ms.
+  PARDISO Factorization Phase... Done in 143.238 ms.
+  Solver setup [19] n = 60847  nnz = 6413509
+     analyze?        1
+     use learner?    1
+     pattern locked? 1
+     call learner?   0
+     call reserve?   0
+     timer assembly matrix:   3.81294 s
+     timer analyze+factorize: 7.67523 s
+  PARDISO Solve Phase... Done in 83.7355 ms.
+  Solver solve [19]  |residual| = 1.24186e-16
+  PARDISO Analysis Phase... Done in 254.577 ms.
+  PARDISO Factorization Phase... Done in 137.593 ms.
+  Solver setup [20] n = 60847  nnz = 6413509
+     analyze?        1
+     use learner?    1
+     pattern locked? 1
+     call learner?   0
+     call reserve?   0
+     timer assembly matrix:   3.98206 s
+     timer analyze+factorize: 8.06748 s
+  PARDISO Solve Phase... Done in 83.7026 ms.
+  Solver solve [20]  |residual| = 1.61581e-22
+Wall time (loop)     : 14.561880 s
+Simulation time      : 0.005000 s
+RTF (wall/sim)       : 2912.376056
+
+Final avg tip pos    : (4.000000, 1.000000, -0.000046) m
+peakRSS=1129744kB total=14.89s
