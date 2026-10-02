@@ -262,6 +262,10 @@ class ChApi ChTimestepperEulerImplicit : public ChTimestepperIIorder, public ChT
     /// Return the associated integrable object.
     virtual ChIntegrable* GetIntegrable() const override { return integrable; }
 
+    /// Request the solver's analysis phase only on the first call and after the system is modified,
+    /// as HHT does, instead of at every Newton iteration (default: false).
+    void SetAnalyzeOnce(bool val) { analyze_once = val; }
+
     /// Perform an integration step.
     virtual void OnAdvance(double dt) override;
 
@@ -274,6 +278,7 @@ class ChApi ChTimestepperEulerImplicit : public ChTimestepperIIorder, public ChT
   protected:
     ChState Xnew;
     ChStateDelta Vnew;
+    bool analyze_once = false;
 };
 
 /// Euler implicit for II order systems using the Anitescu/Stewart/Trinkle single-iteration method.
