@@ -87,6 +87,7 @@ constexpr double kDefaultTipForceZ = -5000.0 * kShellH;
 
 struct DemoOptions {
     bool use_continuous_integration = true;
+    bool analyze_once = false;  // backward Euler requests the analysis phase only on the first call
     int msglvl = 1;  // 0: quiet, 1: summary, 2: per-step
 
     // Export the solver matrices (Z, rhs, Dv, Dl) of every Newton iteration of this step; -1 disables.
@@ -140,6 +141,7 @@ static void PrintUsage(const char* exe) {
               << "Options:\n"
               << "  --contint             Use continuous integration (default)\n"
               << "  --preint              Use pre-integration method\n"
+              << "  --analyze_once        Backward Euler: run the solver analysis phase only on the first call\n"
               << "  --res {0,2,4,8,16,32} Grid resolution (default 0)\n"
               << "                        0->10x10, 2->20x20, 4->50x50,\n"
               << "                        8->100x100, 16->150x150, 32->200x200\n"
@@ -175,6 +177,10 @@ static ParseResult ParseArgs(int argc, char* argv[], DemoOptions& opt) {
         }
         if (a == "--preint") {
             opt.use_continuous_integration = false;
+            continue;
+        }
+        if (a == "--analyze_once") {
+            opt.analyze_once = true;
             continue;
         }
         if (a == "--res") {
@@ -413,6 +419,9 @@ int main(int argc, char* argv[]) {
     solver->SetVerbose(true);  // per-phase timings, as in the 3243 demos
 
     system.SetTimestepperType(ChTimestepper::Type::EULER_IMPLICIT);
+    if (auto euler = std::dynamic_pointer_cast<ChTimestepperEulerImplicit>(system.GetTimestepper()))
+        euler->SetAnalyzeOnce(opt.analyze_once);
+    std::cout << "  analyze_once : " << (opt.analyze_once ? "yes" : "no") << "\n";
 
     const int release_step = 5;
     const int total_steps = 10;
