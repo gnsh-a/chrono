@@ -88,11 +88,17 @@ bool ChSolverCuDSS::FactorizeMatrix(bool analyze) {
         m_nnz = nnz;
     }
 
-    cudaMemcpy(d_values,  m_mat.valuePtr(),      nnz     * sizeof(double), cudaMemcpyHostToDevice);
+    {
+        // Host-to-device copy of the matrix: values always, index arrays only with a new analysis
+        CuDSSTimer timer(this->verbose, "CopyMatrixH2D");
+        cudaMemcpy(d_values,  m_mat.valuePtr(),      nnz     * sizeof(double), cudaMemcpyHostToDevice);
+        if (analyze || realloc) {
+            cudaMemcpy(d_row_ptr, m_mat.outerIndexPtr(), (n + 1) * sizeof(int),    cudaMemcpyHostToDevice);
+            cudaMemcpy(d_col_ind, m_mat.innerIndexPtr(), nnz     * sizeof(int),    cudaMemcpyHostToDevice);
+        }
+    }
 
     if (analyze || realloc) {
-        cudaMemcpy(d_row_ptr, m_mat.outerIndexPtr(), (n + 1) * sizeof(int),    cudaMemcpyHostToDevice);
-        cudaMemcpy(d_col_ind, m_mat.innerIndexPtr(), nnz     * sizeof(int),    cudaMemcpyHostToDevice);
         if (m_mat_A) { cudssMatrixDestroy(m_mat_A); m_mat_A = nullptr; }
 
         if (!cudss_check(cudssMatrixCreateCsr(
@@ -127,7 +133,10 @@ bool ChSolverCuDSS::SolveSystem() {
     cudaSetDevice(m_device);
 
     const int n = m_n;
-    cudaMemcpy(d_b, m_rhs.data(), n * sizeof(double), cudaMemcpyHostToDevice);
+    {
+        CuDSSTimer timer(this->verbose, "CopyRhsH2D");
+        cudaMemcpy(d_b, m_rhs.data(), n * sizeof(double), cudaMemcpyHostToDevice);
+    }
 
     // Recreate dense vector descriptors (hopefully avoids stale pointer issues[need to test])
     // ToDo: leave for now, modify after chrono chage
@@ -143,7 +152,10 @@ bool ChSolverCuDSS::SolveSystem() {
     }
 
     // Copy solution
-    cudaMemcpy(m_sol.data(), d_x, n * sizeof(double), cudaMemcpyDeviceToHost);
+    {
+        CuDSSTimer timer(this->verbose, "CopySolD2H");
+        cudaMemcpy(m_sol.data(), d_x, n * sizeof(double), cudaMemcpyDeviceToHost);
+    }
 
     return true;
 }
