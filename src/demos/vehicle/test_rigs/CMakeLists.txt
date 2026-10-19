@@ -2,25 +2,30 @@
 # CMake configuration file for demos of various Chrono::Vehicle test rigs.
 #=============================================================================
 
-if(NOT CH_ENABLE_MODULE_VSG)
-    return()
-endif()
-
 #--------------------------------------------------------------
 # List all demos
 
-set(DEMOS
-    demo_VEH_TireTestRig
-    demo_VEH_SuspensionTestRig
-    demo_VEH_TrackTestRig
-)
+set(DEMOS "")
 
-if(CH_ENABLE_MODULE_FSI_SPH)
-    set(DEMOS ${DEMOS} demo_VEH_TireTestRig_CRM)
+# The many-tire rig runs without visualization (VSG optional) and needs Pardiso
+if(CH_ENABLE_MODULE_PARDISO_MKL)
+    set(DEMOS ${DEMOS} demo_VEH_ManyTireTestRig)
 endif()
 
-if (CH_ENABLE_MODULE_PARDISO_MKL OR CH_ENABLE_MODULE_MUMPS)
-    set(DEMOS ${DEMOS} demo_VEH_TrackTestRig_Band)
+if(CH_ENABLE_MODULE_VSG)
+    set(DEMOS ${DEMOS}
+        demo_VEH_TireTestRig
+        demo_VEH_SuspensionTestRig
+        demo_VEH_TrackTestRig
+    )
+
+    if(CH_ENABLE_MODULE_FSI_SPH)
+        set(DEMOS ${DEMOS} demo_VEH_TireTestRig_CRM)
+    endif()
+
+    if (CH_ENABLE_MODULE_PARDISO_MKL OR CH_ENABLE_MODULE_MUMPS)
+        set(DEMOS ${DEMOS} demo_VEH_TrackTestRig_Band)
+    endif()
 endif()
 
 #--------------------------------------------------------------
