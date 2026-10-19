@@ -117,6 +117,7 @@ class CH_VEHICLE_API ChTireTestRig {
     void SetGravitationalAcceleration(const ChVector3d& grav) { m_grav = grav; }
 
     /// Set desired normal load (default: 1000 N).
+    /// Note: with gravity set as a vector along -z, the load is currently discarded (known bug, see CreateMechanism).
     void SetNormalLoad(double load) { m_normal_load = load; }
 
     /// Set camber angle (default: 0 rad).

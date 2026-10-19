@@ -512,7 +512,9 @@ void ChTireTestRig::CreateMechanism() {
     m_tire->SetVisualizationType(m_tire_vis);
 
     // Update chassis mass to satisfy requested normal load
-    // As in the lab rig: with gravity along -z, m_grav.z() < 0, so the prescribed normal load is discarded.
+    // KNOWN BUG, kept on purpose to reproduce the lab rig (and the matrices exported with it):
+    // with gravity along -z, m_grav.z() < 0, so m_total_mass and chassis_mass are negative, the prescribed normal
+    // load is discarded, and the chassis keeps the default mass (wheel + tire). The fix is m_normal_load / -m_grav.z().
     m_total_mass = m_normal_load / m_grav.z();
     double other_mass = m_slip_body->GetMass() + m_spindle->GetMass() + m_wheel->GetMass() + m_tire->GetMass();
     double chassis_mass = m_total_mass - other_mass;

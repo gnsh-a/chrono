@@ -53,7 +53,7 @@ struct DemoParams {
     std::string tire_json = "Polaris/Polaris_TMeasyTire.json";
     bool deformable = true;
     bool is_deformable_airless = true;
-    double normal_load = 2400.0;  // [N]
+    double normal_load = 2400.0;  // [N] not applied: known bug in ChTireTestRig::CreateMechanism (kept as in the lab)
     double gravity = 9.81;        // [m/s^2]
     double forward_speed = 0.5;   // [m/s]
     double sim_time = 0.2;        // [s]
