@@ -56,6 +56,7 @@ ChTireTestRig::ChTireTestRig(std::shared_ptr<ChWheel> wheel,
       m_total_mass(0),
       m_mode(Mode::SUSPEND),
       m_output(false),
+      m_free_drop(false),
       m_time_delay(0),
       m_ls_actuated(false),
       m_rs_actuated(false),
@@ -293,12 +294,22 @@ void ChTireTestRig::Initialize(Mode mode, double drop_speed) {
         return;
 
     // Set the drop speed
-    m_drop_motor->SetSpeedFunction(chrono_types::make_shared<ChFunctionConst>(drop_speed));
+    if (!m_free_drop)
+        m_drop_motor->SetSpeedFunction(chrono_types::make_shared<ChFunctionConst>(drop_speed));
 
     // Override motion functions to enforce specified constant longitudinal slip
     if (m_long_slip_constant) {
         m_ls_fun = chrono_types::make_shared<LinSpeedFunction>(m_base_speed);
         m_rs_fun = chrono_types::make_shared<RotSpeedFunction>(m_long_slip, m_base_speed, m_tire->GetRadius());
+    }
+
+    // Free drop: motion functions start after the time delay, measured from the start of the simulation
+    if (m_free_drop) {
+        if (m_ls_actuated)
+            m_lin_motor->SetSpeedFunction(chrono_types::make_shared<DelayedFun>(m_ls_fun, m_time_delay));
+        if (m_rs_actuated)
+            m_rot_motor->SetSpeedFunction(chrono_types::make_shared<DelayedFun>(m_rs_fun, m_time_delay));
+        m_slip_lock->SetMotionAng1(chrono_types::make_shared<DelayedFun>(m_sa_fun, m_time_delay));
     }
 }
 
@@ -307,6 +318,7 @@ void ChTireTestRig::Advance(double step) {
 
     // Check end of dropping phase
     if (m_mode == Mode::TEST &&                                           // in TEST mode
+        !m_free_drop &&                                                   // drop actuator present
         !m_drop_motor->IsDisabled() &&                                    // dropping is ongoing
         m_spindle->GetPos().z() < m_terrain_height + m_tire->GetRadius()  // wheel bottom reached terrain
     ) {
@@ -331,7 +343,7 @@ void ChTireTestRig::Advance(double step) {
     // Turn on calculation of measured quantities
     if (m_mode == Mode::TEST &&        // in TEST mode
         !m_output &&                   // measurements not yet enabled
-        m_drop_motor->IsDisabled() &&  // dropping phase done
+        (m_free_drop || m_drop_motor->IsDisabled()) &&  // dropping phase done
         time > m_time_delay            // past activation delay
     ) {
         std::cout << "\n  time : " << time << " - enable measurements" << std::endl;
@@ -468,7 +480,7 @@ void ChTireTestRig::CreateMechanism() {
     m_system->AddLink(prismatic);
     prismatic->Initialize(m_carrier_body, m_chassis_body, ChFrame<>(m_offset, QUNIT));
 
-    if (m_mode == Mode::TEST) {
+    if (m_mode == Mode::TEST && !m_free_drop) {
         m_drop_motor = chrono_types::make_shared<ChLinkMotorLinearSpeed>();
         m_system->AddLink(m_drop_motor);
         m_drop_motor->Initialize(m_carrier_body, m_chassis_body, ChFrame<>(m_offset, QUNIT));

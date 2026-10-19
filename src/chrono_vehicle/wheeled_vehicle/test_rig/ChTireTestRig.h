@@ -239,8 +239,14 @@ class CH_VEHICLE_API ChTireTestRig {
 
     /// Initialize the rig system.
     /// It is the user's responsibility to set the operation mode and motion functions in a consistent way.
-    /// In TEST mode, the wheel is lowered onto the terrain with a speed equal to `drop_speed`. 
+    /// In TEST mode, the wheel is lowered onto the terrain with a speed equal to `drop_speed`, unless free drop is
+    /// enabled (see SetFreeDrop), in which case `drop_speed` is ignored.
     void Initialize(Mode mode, double drop_speed = 0.1);
+
+    /// Enable free drop in TEST mode (default: false).
+    /// This reproduces the rig before Chrono 10.0: no drop actuator, the wheel falls freely onto the terrain, and the
+    /// motion functions start after the time delay measured from the start of the simulation.
+    void SetFreeDrop(bool val) { m_free_drop = val; }
 
     /// Get suggested collision settings.
     /// These values are meaningful only when using granular terrain and Chrono::Multicore.
@@ -311,7 +317,8 @@ class CH_VEHICLE_API ChTireTestRig {
     ChVector3d m_offset;  ///< rig offset from the origin (not applied to GRANULAR and CRM terrain)
 
     Mode m_mode;    ///< testing mode
-    bool m_output;  ///< if false, report default measurements (typically 0)
+    bool m_output;     ///< if false, report default measurements (typically 0)
+    bool m_free_drop;  ///< if true, no drop actuator in TEST mode (pre-10.0 behavior)
 
     std::shared_ptr<ChTerrain> m_terrain;  ///< handle to underlying terrain subsystem
     std::shared_ptr<ChWheel> m_wheel;      ///< handle to wheel subsystem
