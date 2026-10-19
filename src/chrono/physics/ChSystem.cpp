@@ -1075,12 +1075,15 @@ bool ChSystem::StateSolveCorrection(ChStateDelta& Dv,             // result: com
     }
 
     // Diagnostics:
+    // For a direct solver that is about to run Setup, Z is written from the matrix the solver assembles
+    // (O(nnz)) rather than rebuilt here with BuildSystemMatrix, which is prohibitively slow for large systems.
+    const bool write_direct = write_matrix && call_setup && solver->AsDirect() != nullptr;
     if (write_matrix) {
         std::string prefix = "solve_" + std::to_string(stepcount) + "_" + std::to_string(solvecount);
 
         if (std::dynamic_pointer_cast<ChIterativeSolver>(solver)) {
             descriptor->WriteMatrixSpmv(output_dir, prefix);
-        } else {
+        } else if (!write_direct) {
             descriptor->WriteMatrix(output_dir, prefix);
             descriptor->WriteMatrixBlocks(output_dir, prefix);
         }
@@ -1094,7 +1097,8 @@ bool ChSystem::StateSolveCorrection(ChStateDelta& Dv,             // result: com
         StreamOut(v, file_v);
     }
 
-    solver->EnableWrite(write_matrix, std::to_string(stepcount) + "_" + std::to_string(solvecount), output_dir);
+    solver->EnableWrite(write_matrix && !write_direct, std::to_string(stepcount) + "_" + std::to_string(solvecount),
+                        output_dir);
 
     // If indicated, first perform a solver setup.
     // Return 'false' if the setup phase fails.
@@ -1105,6 +1109,20 @@ bool ChSystem::StateSolveCorrection(ChStateDelta& Dv,             // result: com
         setupcount++;
         if (!success)
             return false;
+    }
+
+    if (write_direct) {
+        std::string prefix = "solve_" + std::to_string(stepcount) + "_" + std::to_string(solvecount);
+
+        std::ofstream file_Z(output_dir + "/" + prefix + "_Z.dat");
+        file_Z << std::setprecision(12) << std::scientific;
+        StreamOut(solver->AsDirect()->GetMatrix(), file_Z, true);
+
+        ChVectorDynamic<double> rhs;
+        descriptor->BuildSystemMatrix(nullptr, &rhs);
+        std::ofstream file_rhs(output_dir + "/" + prefix + "_rhs.dat");
+        file_rhs << std::setprecision(12) << std::scientific;
+        StreamOut(rhs, file_rhs);
     }
 
     // Solve the problem
