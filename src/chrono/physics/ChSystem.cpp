@@ -62,6 +62,7 @@ ChSystem::ChSystem(const std::string& name)
       solvecount(0),
       output_dir("."),
       write_matrix(false),
+      write_matrix_first_iter_only(false),
       ncontacts(0),
       composition_strategy(new ChContactMaterialCompositionStrategy),
       collision_system(nullptr),
@@ -102,6 +103,7 @@ ChSystem::ChSystem(const ChSystem& other) : m_RTF(0), collision_system(nullptr),
     solvecount = other.solvecount;
     setupcount = other.setupcount;
     write_matrix = other.write_matrix;
+    write_matrix_first_iter_only = other.write_matrix_first_iter_only;
     output_dir = other.output_dir;
     SetTimestepperType(other.GetTimestepperType());
     nthreads_chrono = other.nthreads_chrono;
@@ -1077,8 +1079,9 @@ bool ChSystem::StateSolveCorrection(ChStateDelta& Dv,             // result: com
     // Diagnostics:
     // For a direct solver that is about to run Setup, Z is written from the matrix the solver assembles
     // (O(nnz)) rather than rebuilt here with BuildSystemMatrix, which is prohibitively slow for large systems.
-    const bool write_direct = write_matrix && call_setup && solver->AsDirect() != nullptr;
-    if (write_matrix) {
+    const bool should_write = write_matrix && (!write_matrix_first_iter_only || solvecount == 0);
+    const bool write_direct = should_write && call_setup && solver->AsDirect() != nullptr;
+    if (should_write) {
         std::string prefix = "solve_" + std::to_string(stepcount) + "_" + std::to_string(solvecount);
 
         if (std::dynamic_pointer_cast<ChIterativeSolver>(solver)) {
@@ -1097,7 +1100,7 @@ bool ChSystem::StateSolveCorrection(ChStateDelta& Dv,             // result: com
         StreamOut(v, file_v);
     }
 
-    solver->EnableWrite(write_matrix && !write_direct, std::to_string(stepcount) + "_" + std::to_string(solvecount),
+    solver->EnableWrite(should_write && !write_direct, std::to_string(stepcount) + "_" + std::to_string(solvecount),
                         output_dir);
 
     // If indicated, first perform a solver setup.
@@ -1135,7 +1138,7 @@ bool ChSystem::StateSolveCorrection(ChStateDelta& Dv,             // result: com
     IntFromDescriptor(0, Dv, 0, Dl);
 
     // Diagnostics:
-    if (write_matrix) {
+    if (should_write) {
         std::string prefix = "solve_" + std::to_string(stepcount) + "_" + std::to_string(solvecount) + "_";
 
         std::ofstream file_Dv(output_dir + "/" + prefix + "Dv.dat");
