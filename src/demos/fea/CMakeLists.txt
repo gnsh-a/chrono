@@ -6,6 +6,13 @@ set(FEA_DEMOS
     demo_FEA_loads_statics
 )
 
+if(CH_ENABLE_MODULE_PARDISO_MKL)
+    set(FEA_DEMOS ${FEA_DEMOS}
+        jz_FEA_3443_check
+        jz_FEA_3443_check_cudss
+    )
+endif()
+
 # Add demos that require IRRLICHT run-time visualization
 if(CH_ENABLE_MODULE_IRRLICHT)
 
@@ -96,6 +103,10 @@ if(CH_ENABLE_MODULE_IRRLICHT)
   list(APPEND LIBS "Chrono_irrlicht")
 endif()
 
+if(CH_ENABLE_MODULE_CUDSS)
+  list(APPEND LIBS "Chrono_cudss")
+endif()
+
 if(CH_ENABLE_MODULE_VSG)
   list(APPEND LIBS "Chrono_vsg")
 endif()
@@ -136,4 +147,3 @@ foreach(PROGRAM ${FEA_DEMOS})
     
     install(TARGETS ${PROGRAM} CONFIGURATIONS Release DESTINATION ${CH_INSTALL_DEMO})
 endforeach(PROGRAM)
-
