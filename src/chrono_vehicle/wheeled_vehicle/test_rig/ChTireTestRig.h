@@ -100,9 +100,12 @@ class CH_VEHICLE_API ChTireTestRig {
     };
 
     /// Construct a tire test rig within the specified system.
-    ChTireTestRig(std::shared_ptr<ChWheel> wheel,  ///< wheel subsystem
-                  std::shared_ptr<ChTire> tire,    ///< tire subsystem
-                  ChSystem* system                 ///< containing mechanical system
+    /// A non-zero offset translates the whole rig (mechanism and rigid or SCM terrain), so that several rigs can
+    /// share one system.
+    ChTireTestRig(std::shared_ptr<ChWheel> wheel,          ///< wheel subsystem
+                  std::shared_ptr<ChTire> tire,            ///< tire subsystem
+                  ChSystem* system,                        ///< containing mechanical system
+                  ChVector3d offset = ChVector3d(0, 0, 0)  ///< rig offset from the origin
     );
 
     ~ChTireTestRig();
@@ -295,7 +298,8 @@ class CH_VEHICLE_API ChTireTestRig {
     void CreateTerrainGranular();
     void CreateTerrainCRM();
 
-    ChSystem* m_system;  ///< pointer to the Chrono system
+    ChSystem* m_system;   ///< pointer to the Chrono system
+    ChVector3d m_offset;  ///< rig offset from the origin (not applied to GRANULAR and CRM terrain)
 
     Mode m_mode;    ///< testing mode
     bool m_output;  ///< if false, report default measurements (typically 0)
