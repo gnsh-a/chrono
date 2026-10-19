@@ -81,6 +81,9 @@ class CH_VEHICLE_API ANCFAirlessTire3443B : public ChANCFTire {
   private:
     virtual void CreateContactMaterial() override;
 
+    /// Create a triangle-mesh contact surface on the outer-ring elements only.
+    virtual void CreateContactSurface() override;
+
     double m_rim_radius;
     double m_height;
     double m_width;

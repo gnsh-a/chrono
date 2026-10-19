@@ -22,6 +22,7 @@
 
 #include "chrono/fea/ChElementShellANCF_3443B.h"
 #include "chrono_vehicle/wheeled_vehicle/tire/ANCFAirlessTire3443B.h"
+#include "chrono/fea/ChContactSurfaceMesh.h"
 
 using namespace chrono::fea;
 
@@ -552,6 +553,18 @@ std::vector<std::shared_ptr<ChNodeFEAbase>> ANCFAirlessTire3443B::GetConnectedNo
 
 void ANCFAirlessTire3443B::CreateContactMaterial() {
     m_contact_mat = m_matSpokes;
+}
+
+// Same as ChANCFTire::CreateContactSurface, except that a triangle-mesh surface is built on the first
+// m_num_outer_ring_elems 3443B elements (the outer ring) only.
+void ANCFAirlessTire3443B::CreateContactSurface() {
+    if (m_contact_surface_type != ContactSurfaceType::TRIANGLE_MESH || m_num_outer_ring_elems <= 0) {
+        ChANCFTire::CreateContactSurface();
+        return;
+    }
+    auto contact_surf = chrono_types::make_shared<ChContactSurfaceMesh>(m_contact_mat);
+    contact_surf->AddFacesFromBoundary(*m_mesh, m_contact_surface_dim, false, true, true, m_num_outer_ring_elems);
+    m_mesh->AddContactSurface(contact_surf);
 }
 
 }  // end namespace vehicle

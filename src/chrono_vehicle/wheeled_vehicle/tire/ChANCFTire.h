@@ -60,7 +60,7 @@ class CH_VEHICLE_API ChANCFTire : public ChDeformableTire {
     virtual void CreatePressureLoad() override final;
 
     /// Create the contact surface for the tire mesh.
-    virtual void CreateContactSurface() override final;
+    virtual void CreateContactSurface() override;
 
     /// Create the tire-rim connections.
     virtual void CreateRimConnections(std::shared_ptr<ChBody> wheel) override final;
