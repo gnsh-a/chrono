@@ -48,7 +48,7 @@ ChTireTestRig::ChTireTestRig(std::shared_ptr<ChWheel> wheel,
                              ChVector3d offset)
     : m_system(system),
       m_offset(offset),
-      m_grav(9.8),
+      m_grav(0, 0, -9.8),
       m_wheel(wheel),
       m_tire(tire),
       m_camber_angle(0),
@@ -359,7 +359,7 @@ void ChTireTestRig::Advance(double step) {
 // -----------------------------------------------------------------------------
 
 void ChTireTestRig::CreateMechanism() {
-    m_system->SetGravitationalAcceleration(ChVector3d(0, 0, -m_grav));
+    m_system->SetGravitationalAcceleration(m_grav);
 
     // Create bodies.
     // Rig bodies are constructed with mass and inertia commensurate with those of the wheel-tire system.
@@ -500,15 +500,14 @@ void ChTireTestRig::CreateMechanism() {
     m_tire->SetVisualizationType(m_tire_vis);
 
     // Update chassis mass to satisfy requested normal load
-    if (m_grav > 0) {
-        m_total_mass = m_normal_load / m_grav;
-        double other_mass = m_slip_body->GetMass() + m_spindle->GetMass() + m_wheel->GetMass() + m_tire->GetMass();
-        double chassis_mass = m_total_mass - other_mass;
-        if (chassis_mass > mass) {
-            m_chassis_body->SetMass(chassis_mass);
-        } else {
-            std::cout << "\nWARNING!  Prescribed normal load too small. Discarded.\n" << std::endl;
-        }
+    // As in the lab rig: with gravity along -z, m_grav.z() < 0, so the prescribed normal load is discarded.
+    m_total_mass = m_normal_load / m_grav.z();
+    double other_mass = m_slip_body->GetMass() + m_spindle->GetMass() + m_wheel->GetMass() + m_tire->GetMass();
+    double chassis_mass = m_total_mass - other_mass;
+    if (chassis_mass > mass) {
+        m_chassis_body->SetMass(chassis_mass);
+    } else {
+        std::cout << "\nWARNING!  Prescribed normal load too small. Discarded.\n" << std::endl;
     }
 
     // Set terrain offset (based on wheel center) and terrain height (below tire)
@@ -654,7 +653,7 @@ void ChTireTestRig::CreateTerrainCRM() {
         chrono_types::make_shared<CRMTerrain>(*m_system, m_params_crm.sph_params.initial_spacing);
 
     terrain->SetOutputLevel(OutputLevel::STATE);
-    terrain->SetGravitationalAcceleration(ChVector3d(0, 0, -m_grav));
+    terrain->SetGravitationalAcceleration(m_grav);
 
     terrain->SetStepSizeCFD(m_tire_step);
 

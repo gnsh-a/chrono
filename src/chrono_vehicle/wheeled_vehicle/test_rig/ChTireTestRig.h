@@ -111,7 +111,10 @@ class CH_VEHICLE_API ChTireTestRig {
     ~ChTireTestRig();
 
     /// Set gravitational acceleration (default: 9.81 m/s2).
-    void SetGravitationalAcceleration(double grav) { m_grav = grav; }
+    void SetGravitationalAcceleration(double grav) { m_grav = ChVector3d(0, 0, -grav); }
+
+    /// Set gravitational acceleration as a vector (default: (0, 0, -9.8) m/s2).
+    void SetGravitationalAcceleration(const ChVector3d& grav) { m_grav = grav; }
 
     /// Set desired normal load (default: 1000 N).
     void SetNormalLoad(double load) { m_normal_load = load; }
@@ -311,7 +314,7 @@ class CH_VEHICLE_API ChTireTestRig {
     double m_tire_step;                    ///< step size for tire integration
     double m_camber_angle;                 ///< camber angle
 
-    double m_grav;         ///< gravitational acceleration
+    ChVector3d m_grav;     ///< gravitational acceleration
     double m_normal_load;  ///< desired normal load
     double m_total_mass;   ///< total sprung mass
     double m_time_delay;   ///< time delay before applying external load
