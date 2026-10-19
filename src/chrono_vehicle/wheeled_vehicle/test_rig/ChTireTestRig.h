@@ -284,6 +284,12 @@ class CH_VEHICLE_API ChTireTestRig {
     double GetCamberAngle() const;
 
     /// Get the spindle object.
+    /// Get a handle to the wheel subsystem.
+    std::shared_ptr<ChWheel> GetWheel() const { return m_wheel; }
+
+    /// Get a handle to the tire subsystem.
+    std::shared_ptr<ChTire> GetTire() const { return m_tire; }
+
     std::shared_ptr<ChSpindle> GetSpindle() const { return m_spindle; }
 
     /// Get the linear motor used to actuate the carrier.
