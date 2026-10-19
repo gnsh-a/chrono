@@ -459,7 +459,8 @@ class ChApi ChContactSurfaceMesh : public ChContactSurface {
                               double sphere_swept = 0.0,           ///< radius of swept sphere
                               bool ccw = true,                     ///< indicate counterclockwise vertex ordering
                               bool include_cable_elements = true,  ///< create contact triangles for cable elements
-                              bool include_beam_elements = true    ///< create contact triangles for beam elements
+                              bool include_beam_elements = true,   ///< create contact triangles for beam elements
+                              int num_outer_ring_elems = 0         ///< number of outer ring elements (ANCFAirlessTire3443B)
     );
 
     /// Construct a contact surface from a triangular mesh.
