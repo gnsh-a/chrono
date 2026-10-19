@@ -379,6 +379,14 @@ void ChTimestepperEulerImplicit::OnAdvance(double dt) {
     Xnew = X + V * dt;
     Vnew = V;  //+ A()*dt;
 
+    // With analyze-once, request the analysis phase only on the first call or after the system was modified
+    bool analyze = true;
+    if (analyze_once) {
+        if (integrable->StateModified())
+            call_analyze = true;
+        analyze = call_analyze;
+    }
+
     // Use Newton iteration to solve for v_new
     //
     // [ M - dt*dF/dv - dt^2*dF/dx    Cq' ] [ Ds     ] = [ M*(v_old - v_new) + dt*f + dt*Cq'*l ]
@@ -411,8 +419,13 @@ void ChTimestepperEulerImplicit::OnAdvance(double dt) {
             false,                              // do not scatter update to Xnew Vnew T+dt before computing correction
             UpdateFlags::UPDATE_ALL_NO_VISUAL,  // no need for full update, since no scatter
             true,                               // always call the solver's Setup
-            true                                // always call the solver's Setup analyze phase
+            analyze                             // call the analyze phase (every call unless analyze-once)
         );
+
+        if (analyze_once) {
+            analyze = false;
+            call_analyze = false;
+        }
 
         num_step_iters++;
         num_step_setups++;
