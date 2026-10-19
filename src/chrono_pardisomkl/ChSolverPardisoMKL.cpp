@@ -15,6 +15,8 @@
 #include "chrono_pardisomkl/ChSolverPardisoMKL.h"
 #include "chrono/utils/ChOpenMP.h"
 
+#include <iostream>
+
 namespace chrono {
 
 ChSolverPardisoMKL::ChSolverPardisoMKL(unsigned int num_threads) {
@@ -23,7 +25,15 @@ ChSolverPardisoMKL::ChSolverPardisoMKL(unsigned int num_threads) {
 
 bool ChSolverPardisoMKL::FactorizeMatrix(bool analyze) {
     if (analyze) {
+        if (verbose)
+            std::cout << "  PARDISO Analysis Phase... " << std::flush;
+        m_timer_analyze.reset();
+        m_timer_analyze.start();
         m_engine.analyzePattern(m_mat);
+        m_timer_analyze.stop();
+        if (verbose)
+            std::cout << "Done in " << m_timer_analyze.GetTimeSeconds() * 1000.0 << " ms." << std::endl;
+
         auto err_A = m_engine.info();
         if (err_A != Eigen::Success) {
             std::cerr << "Pardiso ANALYZE failed with error code " << ComputationInfoString(err_A) << std::endl;
@@ -31,7 +41,15 @@ bool ChSolverPardisoMKL::FactorizeMatrix(bool analyze) {
         }
     }
 
+    if (verbose)
+        std::cout << "  PARDISO Factorization Phase... " << std::flush;
+    m_timer_factorize.reset();
+    m_timer_factorize.start();
     m_engine.factorize(m_mat);
+    m_timer_factorize.stop();
+    if (verbose)
+        std::cout << "Done in " << m_timer_factorize.GetTimeSeconds() * 1000.0 << " ms." << std::endl;
+
     auto err_F = m_engine.info();
     if (err_F != Eigen::Success) {
         std::cerr << "Pardiso FACTORIZE failed with error code " << ComputationInfoString(err_F) << std::endl;
@@ -42,7 +60,15 @@ bool ChSolverPardisoMKL::FactorizeMatrix(bool analyze) {
 }
 
 bool ChSolverPardisoMKL::SolveSystem() {
+    if (verbose)
+        std::cout << "  PARDISO Solve Phase... " << std::flush;
+    m_timer_solve.reset();
+    m_timer_solve.start();
     m_sol = m_engine.solve(m_rhs);
+    m_timer_solve.stop();
+    if (verbose)
+        std::cout << "Done in " << m_timer_solve.GetTimeSeconds() * 1000.0 << " ms." << std::endl;
+
     return (m_engine.info() == Eigen::Success);
 }
 
