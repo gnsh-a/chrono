@@ -417,6 +417,9 @@ int main(int argc, char* argv[]) {
     solver->UseSparsityPatternLearner(true);
     solver->LockSparsityPattern(true);
     solver->SetVerbose(true);  // per-phase timings, as in the 3243 demos
+    // Iterative refinement only when pivots are perturbed (MKL default, iparm[7] = 0), as in the offline benchmark.
+    // Eigen's PardisoLU sets iparm[7] = 2, which runs up to two refinement steps on every solve.
+    solver->GetMklEngine().pardisoParameterArray()[7] = 0;
 
     system.SetTimestepperType(ChTimestepper::Type::EULER_IMPLICIT);
     if (auto euler = std::dynamic_pointer_cast<ChTimestepperEulerImplicit>(system.GetTimestepper()))
